@@ -5,7 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c4898b76-da90-4895-9565-e8f739ffab35" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/CGP/v17.3_fitted_dose_response.xlsx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/CGP/v17.3_public_raw_data.xlsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SVMclassifierForGeneExpression" afterPath="$PROJECT_DIR$/SVMclassifierForGeneExpression" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/gene_expression/ccle_expression_trans_index_col.csv" afterPath="$PROJECT_DIR$/data/gene_expression/ccle_expression_trans_index_col.csv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data_standardization.py" afterPath="$PROJECT_DIR$/data_standardization.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/feature_selection_DataPreprocess.py" afterPath="$PROJECT_DIR$/feature_selection_DataPreprocess.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/feature_selection_final.py" afterPath="$PROJECT_DIR$/feature_selection_final.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/svm-predictor.py" afterPath="$PROJECT_DIR$/svm-predictor.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -19,8 +27,8 @@
       <file leaf-file-name="feature_selection_final.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/feature_selection_final.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="15" column="12" lean-forward="true" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
+            <state relative-caret-position="113">
+              <caret line="9" column="21" lean-forward="true" selection-start-line="9" selection-start-column="21" selection-end-line="9" selection-end-column="21" />
               <folding>
                 <element signature="e#0#27#0" expanded="true" />
               </folding>
@@ -31,8 +39,18 @@
       <file leaf-file-name="CCLE_NP24.2009_Drug_data_2015.02.24.csv" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/data/drug_cell/CCLE_NP24.2009_Drug_data_2015.02.24.csv">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1890">
-              <caret line="8" column="197" lean-forward="false" selection-start-line="8" selection-start-column="197" selection-end-line="8" selection-end-column="197" />
+            <state relative-caret-position="-5913">
+              <caret line="15" column="24" lean-forward="true" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="data_standardization.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/data_standardization.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1161">
+              <caret line="43" column="8" lean-forward="false" selection-start-line="43" selection-start-column="8" selection-end-line="43" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -41,78 +59,69 @@
       <file leaf-file-name="feature_selection_DataPreprocess.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/feature_selection_DataPreprocess.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="5" column="19" lean-forward="true" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
+            <state relative-caret-position="243">
+              <caret line="9" column="52" lean-forward="true" selection-start-line="9" selection-start-column="52" selection-end-line="9" selection-end-column="52" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="17-AAG_train_data.csv" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data/drug_cell/drug/17-AAG_train_data.csv">
-          <provider selected="true" editor-type-id="LargeFileEditor">
-            <state relative-caret-position="84834">
-              <caret line="2" column="62502" lean-forward="true" selection-start-line="2" selection-start-column="62502" selection-end-line="2" selection-end-column="62502" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ccle_expression_trans_index_col.csv" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data/gene_expression/ccle_expression_trans_index_col.csv">
-          <provider selected="true" editor-type-id="LargeFileEditor">
-            <state relative-caret-position="-136578">
-              <caret line="0" column="286" lean-forward="true" selection-start-line="0" selection-start-column="286" selection-end-line="0" selection-end-column="286" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/testdemo/__init__.py">
+      <file leaf-file-name="Erlotinib_train_data-rfe.csv" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/data/drug_cell/drug/Erlotinib_train_data-rfe.csv">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="243">
-              <caret line="9" column="20" lean-forward="true" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
+            <state relative-caret-position="0">
+              <caret line="0" column="88" lean-forward="true" selection-start-line="0" selection-start-column="88" selection-end-line="0" selection-end-column="88" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Erlotinib_train_data.csv" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/data/drug_cell/drug/Erlotinib_train_data.csv">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="648">
+              <caret line="0" column="3148" lean-forward="false" selection-start-line="0" selection-start-column="3136" selection-end-line="0" selection-end-column="3148" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="svm-predictor.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/svm-predictor.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="464">
+              <caret line="23" column="27" lean-forward="true" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="27" />
               <folding>
-                <element signature="e#0#19#0" expanded="true" />
+                <element signature="e#23#42#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="data_standardization.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data_standardization.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="17" column="23" lean-forward="true" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="17-AAG.csv" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data/drug_cell/drug/17-AAG.csv">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="20" column="27" lean-forward="true" selection-start-line="20" selection-start-column="27" selection-end-line="20" selection-end-column="27" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="data_standard_res1.csv" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data/drug_cell/data_standard_res1.csv">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="7" column="14" lean-forward="false" selection-start-line="7" selection-start-column="14" selection-end-line="7" selection-end-column="14" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="data_standard_normalize.csv" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data/drug_cell/data_standard_normalize.csv">
+      <file leaf-file-name="17-AAG_train_data-rfe.csv" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/data/drug_cell/drug/17-AAG_train_data-rfe.csv">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
-              <caret line="0" column="26" lean-forward="false" selection-start-line="0" selection-start-column="20" selection-end-line="0" selection-end-column="26" />
+              <caret line="0" column="41" lean-forward="false" selection-start-line="0" selection-start-column="33" selection-end-line="0" selection-end-column="41" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Irinotecan_train_data.csv" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/data/drug_cell/drug/Irinotecan_train_data.csv">
+          <provider selected="true" editor-type-id="LargeFileEditor">
+            <state relative-caret-position="-729">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Irinotecan.csv" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/data/drug_cell/drug/Irinotecan.csv">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-27">
+              <caret line="14" column="35" lean-forward="true" selection-start-line="14" selection-start-column="35" selection-end-line="14" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -131,7 +140,12 @@
     <findStrings>
       <find>769P_KIDNEY</find>
       <find>17-AAG</find>
+      <find>1026_at</find>
+      <find>drug_17_AAG</find>
     </findStrings>
+    <replaceStrings>
+      <replace>drug_info</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -142,11 +156,12 @@
         <option value="$PROJECT_DIR$/Combat.R" />
         <option value="$PROJECT_DIR$/SVMclassifierForGeneExpression/bagSVM_tumor_vs_normal.ipynb" />
         <option value="$PROJECT_DIR$/SVMclassifierForGeneExpression/svm_classifier.py" />
-        <option value="$PROJECT_DIR$/data_standardization.py" />
         <option value="$PROJECT_DIR$/testdemo/__init__.py" />
         <option value="$PROJECT_DIR$/feature_selection_svm_rfe.py" />
-        <option value="$PROJECT_DIR$/feature_selection_DataPreprocess.py" />
+        <option value="$PROJECT_DIR$/svm-predictor.py" />
         <option value="$PROJECT_DIR$/feature_selection_final.py" />
+        <option value="$PROJECT_DIR$/data_standardization.py" />
+        <option value="$PROJECT_DIR$/feature_selection_DataPreprocess.py" />
       </list>
     </option>
   </component>
@@ -209,17 +224,6 @@
               <item name="data" type="462c0819:PsiDirectoryNode" />
               <item name="drug_cell" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="anticaner-predictor" type="b2602c69:ProjectViewProjectNode" />
-              <item name="anticaner-predictor" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-              <item name="gene_expression" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="anticaner-predictor" type="b2602c69:ProjectViewProjectNode" />
-              <item name="anticaner-predictor" type="462c0819:PsiDirectoryNode" />
-              <item name="testdemo" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -234,8 +238,9 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/data/drug_cell" />
+      <recent name="$PROJECT_DIR$/data/CGP" />
       <recent name="$PROJECT_DIR$/data" />
+      <recent name="$PROJECT_DIR$/data/drug_cell" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -319,37 +324,37 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
-    <configuration name="svm_classifier" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="svm-predictor" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/SVMclassifierForGeneExpression" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="anticaner-predictor" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/SVMclassifierForGeneExpression/svm_classifier.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/svm-predictor.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.svm_classifier" />
-      <item index="1" class="java.lang.String" itemvalue="Python.feature_selection_svm_rfe" />
-      <item index="2" class="java.lang.String" itemvalue="Python.data_standardization" />
-      <item index="3" class="java.lang.String" itemvalue="Python.__init__" />
-      <item index="4" class="java.lang.String" itemvalue="Python.feature_selection_final" />
+      <item index="0" class="java.lang.String" itemvalue="Python.feature_selection_svm_rfe" />
+      <item index="1" class="java.lang.String" itemvalue="Python.data_standardization" />
+      <item index="2" class="java.lang.String" itemvalue="Python.__init__" />
+      <item index="3" class="java.lang.String" itemvalue="Python.feature_selection_final" />
+      <item index="4" class="java.lang.String" itemvalue="Python.svm-predictor" />
     </list>
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Python.feature_selection_final" />
         <item index="1" class="java.lang.String" itemvalue="Python.feature_selection_svm_rfe" />
-        <item index="2" class="java.lang.String" itemvalue="Python.__init__" />
-        <item index="3" class="java.lang.String" itemvalue="Python.data_standardization" />
-        <item index="4" class="java.lang.String" itemvalue="Python.svm_classifier" />
+        <item index="2" class="java.lang.String" itemvalue="Python.svm-predictor" />
+        <item index="3" class="java.lang.String" itemvalue="Python.__init__" />
+        <item index="4" class="java.lang.String" itemvalue="Python.data_standardization" />
       </list>
     </recent_temporary>
   </component>
@@ -375,10 +380,10 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4156946" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32979852" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4156946" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32979852" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33333334" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20743206" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="R Packages" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="R Graphics" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32979852" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -464,7 +469,7 @@
         <state relative-caret-position="1674">
           <caret line="64" column="9" lean-forward="true" selection-start-line="64" selection-start-column="9" selection-end-line="64" selection-end-column="9" />
           <folding>
-            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#0#18#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -541,13 +546,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SVMclassifierForGeneExpression/bagSVM_tumor_vs_normal.ipynb">
-      <provider selected="true" editor-type-id="ipnb-editor">
-        <state>
-          <selected id="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/SVMclassifierForGeneExpression/README.md">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -589,19 +587,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/CCLE_Expression_Entrez_2012-09-29 _copy.gct">
-      <provider selected="true" editor-type-id="LargeFileEditor">
-        <state relative-caret-position="6642">
-          <caret line="1" column="26" lean-forward="false" selection-start-line="1" selection-start-column="26" selection-end-line="1" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/SVMclassifierForGeneExpression/svm_classifier.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="262">
           <caret line="49" column="0" lean-forward="true" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
           <folding>
-            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#0#18#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -617,17 +608,38 @@
     <entry file="file://$PROJECT_DIR$/testdemo/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="243">
-          <caret line="9" column="20" lean-forward="true" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
+          <caret line="9" column="20" lean-forward="false" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
           <folding>
-            <element signature="e#0#19#0" expanded="true" />
+            <element signature="e#0#19#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SVMclassifierForGeneExpression/bagSVM_tumor_vs_normal.ipynb">
+      <provider selected="true" editor-type-id="ipnb-editor">
+        <state>
+          <selected id="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/drug_cell/drug/17-AAG_train_data.csv">
+      <provider selected="true" editor-type-id="LargeFileEditor">
+        <state relative-caret-position="320949">
+          <caret line="13" column="24295" lean-forward="true" selection-start-line="13" selection-start-column="24295" selection-end-line="13" selection-end-column="24295" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/gene_expression/ccle_expression_trans_index_col.csv">
+      <provider selected="true" editor-type-id="LargeFileEditor">
+        <state relative-caret-position="0">
+          <caret line="0" column="1" lean-forward="true" selection-start-line="0" selection-start-column="1" selection-end-line="0" selection-end-column="1" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/data/drug_cell/data_standard_res1.csv">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="7" column="14" lean-forward="false" selection-start-line="7" selection-start-column="14" selection-end-line="7" selection-end-column="14" />
+        <state relative-caret-position="0">
+          <caret line="0" column="19" lean-forward="false" selection-start-line="0" selection-start-column="15" selection-end-line="0" selection-end-column="19" />
           <folding />
         </state>
       </provider>
@@ -640,25 +652,98 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/drug_cell/drug/17-AAG_train_data.csv">
+    <entry file="file://$PROJECT_DIR$/data/CCLE_Expression_Entrez_2012-09-29 _copy.gct">
       <provider selected="true" editor-type-id="LargeFileEditor">
-        <state relative-caret-position="84834">
-          <caret line="2" column="62502" lean-forward="true" selection-start-line="2" selection-start-column="62502" selection-end-line="2" selection-end-column="62502" />
+        <state relative-caret-position="31212">
+          <caret line="8" column="10962" lean-forward="true" selection-start-line="8" selection-start-column="10962" selection-end-line="8" selection-end-column="10962" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/drug_cell/drug/Erlotinib.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3719">
+          <caret line="0" column="22" lean-forward="true" selection-start-line="0" selection-start-column="22" selection-end-line="0" selection-end-column="22" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/data/drug_cell/drug/17-AAG.csv">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="20" column="27" lean-forward="true" selection-start-line="20" selection-start-column="27" selection-end-line="20" selection-end-column="27" />
+        <state relative-caret-position="-5366">
+          <caret line="10" column="26" lean-forward="true" selection-start-line="10" selection-start-column="26" selection-end-line="10" selection-end-column="26" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/drug_cell/drug/L-685458.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1532">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/drug_cell/drug/Lapatinib.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4374">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/drug_cell/drug/Nilotinib.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-776">
+          <caret line="4" column="17" lean-forward="true" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/drug_cell/drug/Nutlin-3.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4637">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/drug_cell/drug/Irinotecan.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-27">
+          <caret line="14" column="35" lean-forward="true" selection-start-line="14" selection-start-column="35" selection-end-line="14" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/drug_cell/drug/Irinotecan_train_data.csv">
+      <provider selected="true" editor-type-id="LargeFileEditor">
+        <state relative-caret-position="-729">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/svm-predictor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="464">
+          <caret line="23" column="27" lean-forward="true" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="27" />
+          <folding>
+            <element signature="e#23#42#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/feature_selection_final.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="15" column="12" lean-forward="true" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
+        <state relative-caret-position="113">
+          <caret line="9" column="21" lean-forward="true" selection-start-line="9" selection-start-column="21" selection-end-line="9" selection-end-column="21" />
           <folding>
             <element signature="e#0#27#0" expanded="true" />
           </folding>
@@ -667,31 +752,48 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/data/drug_cell/CCLE_NP24.2009_Drug_data_2015.02.24.csv">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1890">
-          <caret line="8" column="197" lean-forward="false" selection-start-line="8" selection-start-column="197" selection-end-line="8" selection-end-column="197" />
+        <state relative-caret-position="-5913">
+          <caret line="15" column="24" lean-forward="true" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/gene_expression/ccle_expression_trans_index_col.csv">
-      <provider selected="true" editor-type-id="LargeFileEditor">
-        <state relative-caret-position="-136578">
-          <caret line="0" column="286" lean-forward="true" selection-start-line="0" selection-start-column="286" selection-end-line="0" selection-end-column="286" />
+    <entry file="file://$PROJECT_DIR$/data/drug_cell/drug/17-AAG_train_data-rfe.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="41" lean-forward="false" selection-start-line="0" selection-start-column="33" selection-end-line="0" selection-end-column="41" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/data_standardization.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="17" column="23" lean-forward="true" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
+        <state relative-caret-position="1161">
+          <caret line="43" column="8" lean-forward="false" selection-start-line="43" selection-start-column="8" selection-end-line="43" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/drug_cell/drug/Erlotinib_train_data.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="648">
+          <caret line="0" column="3148" lean-forward="false" selection-start-line="0" selection-start-column="3136" selection-end-line="0" selection-end-column="3148" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/drug_cell/drug/Erlotinib_train_data-rfe.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="88" lean-forward="true" selection-start-line="0" selection-start-column="88" selection-end-line="0" selection-end-column="88" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/feature_selection_DataPreprocess.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="5" column="19" lean-forward="true" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
+        <state relative-caret-position="243">
+          <caret line="9" column="52" lean-forward="true" selection-start-line="9" selection-start-column="52" selection-end-line="9" selection-end-column="52" />
           <folding />
         </state>
       </provider>
