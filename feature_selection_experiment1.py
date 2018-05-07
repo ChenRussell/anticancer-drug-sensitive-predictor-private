@@ -14,7 +14,7 @@ indexs = ['17-AAG', 'AEW541', 'AZD0530', 'AZD6244', 'Erlotinib', 'Irinotecan', '
 data = pd.read_csv('data/feature_select_accuracy.csv')
 data.set_index('drug', inplace=True, drop=True)
 print(data)
-data.plot(kind='bar')
+data.plot(kind='bar', width=0.9)
 # 设置坐标轴名称
 plt.xlabel('')
 plt.ylabel('model accuracy')
