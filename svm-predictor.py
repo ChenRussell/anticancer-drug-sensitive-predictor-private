@@ -12,6 +12,7 @@ y = data.iloc[:, -1]
 
 # from sklearn.cross_validation import train_test_split
 from sklearn.model_selection import train_test_split
+
 # x为数据集的feature熟悉，y为label.
 # x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
 x_train, x_test, y_train, y_test = train_test_split(X, y, random_state=1, train_size=0.7)
@@ -21,10 +22,11 @@ print(y_train)
 # print(X, len(X))
 # print(y, len(y))
 #
-model = svm.SVC(C=5)    # gamma缺省值为 1.0/x.shape[1]
+# model = svm.SVC(C=0.26678762, gamma=0.02152877)  # gamma缺省值为 1.0/x.shape[1]
+model = svm.SVC(C=0.1)
 model.fit(x_train, y_train)
 y_score = model.decision_function(x_test)
-print(model.score(x_test, y_test))
+print("score: ", model.score(x_test, y_test))
 
 fpr, tpr, threshold = roc_curve(y_test, y_score)  ###计算真正率和假正率
 roc_auc = auc(fpr, tpr)  ###计算auc的值
@@ -41,5 +43,5 @@ plt.xlabel('False Positive Rate', fontsize=15)
 plt.ylabel('True Positive Rate', fontsize=15)
 plt.title('AZD6244', fontsize=20)
 plt.legend(loc="lower right", fontsize=20)
-plt.savefig('image/svm_roc1.png')
+# plt.savefig('image/svm_roc1.png')
 plt.show()

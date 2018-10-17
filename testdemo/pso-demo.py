@@ -24,7 +24,7 @@ class PSO():
 
     # ---------------------目标函数Sphere函数-----------------------------
     def function(self, X):
-        return X**2-4*X+3
+        return X ** 2 - 4 * X + 3
 
     # ---------------------初始化种群----------------------------------
     def init_Population(self):
@@ -64,7 +64,7 @@ class PSO():
         # ----------------------程序执行-----------------------
 
 
-my_pso = PSO(pN=30, dim=1, max_iter=100)
+my_pso = PSO(pN=30, dim=1, max_iter=100)  # 维度代表变量的个数
 my_pso.init_Population()
 fitness = my_pso.iterator()
 # -------------------画图--------------------
