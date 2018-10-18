@@ -7,28 +7,33 @@ from sklearn import svm
 from sklearn.model_selection import train_test_split
 import cmath
 
-data = pd.read_csv('data/drug_cell/drug/AEW541_train_data-rfe.csv')
-X = data.iloc[:, :-1]
-y = data.iloc[:, -1]
-x_train, x_test, y_train, y_test = train_test_split(X, y, random_state=1, train_size=0.7)
 
-MAX_ITER = 1000
+# data = pd.read_csv('data/drug_cell/drug/AEW541_train_data-rfe.csv')
+# X = data.iloc[:, :-1]
+# y = data.iloc[:, -1]
+# x_train, x_test, y_train, y_test = train_test_split(X, y, random_state=1, train_size=0.7)
+#
+# MAX_ITER = 1000
 
 
 # ----------------------PSO参数设置---------------------------------
-class PSO():
-    def __init__(self, pN, dim, max_iter):
-        self.w = 1
-        self.wS = 0.9
-        self.wE = 0.4
-        self.c1 = 2.05
-        self.c2 = 2.05
-        self.L = self.c1 + self.c2
-        self.K = 2 / (abs(2 - self.L - cmath.sqrt(self.L ** 2 - 4 * self.L)))
+class PSO_RW():
+    def __init__(self, max_iter, x_train, y_train, x_test, y_test, pN=30, dim=2):
+        self.x_train = x_train
+        self.y_train = y_train
+        self.x_test = x_test
+        self.y_test = y_test
+
+        self.w = 0.9  # 惯性权重
+        self.c1 = 1.494
+        self.c2 = 1.494
         self.r1 = random.uniform(0, 1)
+        # self.r1 = 0.6
         self.r2 = random.uniform(0, 1)
+        # self.r2 = 0.3
         self.pN = pN  # 粒子数量
         self.dim = dim  # 搜索维度
+        self.max_v = 10  # 最大速度
         self.max_iter = max_iter  # 迭代次数
         self.X = np.zeros((self.pN, self.dim))  # 所有粒子的位置和速度
         self.V = np.zeros((self.pN, self.dim))
@@ -41,18 +46,18 @@ class PSO():
 
     def function(self, c, g):
         if g < 0 or c < 0:
-            return 100
+            return 1e10
         model = svm.SVC(C=c, gamma=g)  # gamma缺省值为 1.0/x.shape[1]
-        model.fit(x_train, y_train)
-        y_score = model.score(x_test, y_test)
+        model.fit(self.x_train, self.y_train)
+        y_score = model.score(self.x_test, self.y_test)
         return -y_score
 
     # ---------------------初始化种群----------------------------------
     def init_Population(self):
         for i in range(self.pN):
             for j in range(self.dim):
-                self.X[i][j] = random.uniform(0, 10)
-                self.V[i][j] = random.uniform(0, 10)
+                self.X[i][j] = random.uniform(0, 10)  # 位置的初始范围
+                self.V[i][j] = random.uniform(0, 10)  # 速度的初始范围
             self.pbest[i] = self.X[i]
             tmp = self.function(self.X[i][0], self.X[i][1])
             self.p_fit[i] = tmp
@@ -73,31 +78,37 @@ class PSO():
                     if self.p_fit[i] < self.fit:  # 更新全局最优
                         self.gbest = self.X[i]
                         self.fit = self.p_fit[i]
+
+            self.r1 = random.uniform(0, 1)
+            self.r2 = random.uniform(0, 1)
             for i in range(self.pN):
-                self.V[i] = self.K * (self.w * self.V[i] + self.c1 * self.r1 * (self.pbest[i] - self.X[i]) +
-                                      self.c2 * self.r2 * (self.gbest - self.X[i]))
+                self.V[i] = self.w * self.V[i] + self.c1 * self.r1 * (self.pbest[i] - self.X[i]) + \
+                            self.c2 * self.r2 * (self.gbest - self.X[i])
+                self.V[i] = [self.max_v if v > self.max_v else v for v in self.V[i]]  # 当速度大于最大速度时，赋值为最大速度
                 self.X[i] = self.X[i] + self.V[i]
             fitness.append(self.fit)
-            print(self.X[0], end=" ")
-            print(self.fit)  # 输出最优值
+
+            print('V: ', self.V[0], end=" ")
+            print('X: ', self.X[0], end=" ")
+            print(self.fit, end=" ")  # 输出最优值
+            print('PSO-RANDIW 当前迭代次数：', iter)
 
             # 更新惯性权重
-            # self.w = self.wS - (self.wS - self.wE) * iter / MAX_ITER
+            self.w = 0.5 + random.uniform(0, 1) / 2
         return fitness
 
         # ----------------------程序执行-----------------------
 
-
-my_pso = PSO(pN=30, dim=2, max_iter=MAX_ITER)  # 维度代表变量的个数
-my_pso.init_Population()
-fitness = my_pso.iterator()
-# -------------------画图--------------------
-plt.figure(1)
-plt.title("Figure1")
-plt.xlabel("iterators", size=14)
-plt.ylabel("fitness", size=14)
-t = np.array([t for t in range(0, MAX_ITER)])
-fitness = np.array(fitness)
-fitness_2 = [-v for v in fitness]  # 取反，得到正数，模型准确率
-plt.plot(t, fitness_2, color='b', linewidth=3)
-plt.show()
+# my_pso = PSO(pN=30, dim=2, max_iter=MAX_ITER)  # 维度代表变量的个数
+# my_pso.init_Population()
+# fitness = my_pso.iterator()
+# # -------------------画图--------------------
+# plt.figure(1)
+# plt.title("Figure1")
+# plt.xlabel("iterators", size=14)
+# plt.ylabel("fitness", size=14)
+# t = np.array([t for t in range(0, MAX_ITER)])
+# fitness = np.array(fitness)
+# fitness_2 = [-v for v in fitness]  # 取反，得到正数，模型准确率
+# plt.plot(t, fitness_2, color='b', linewidth=3)
+# plt.show()

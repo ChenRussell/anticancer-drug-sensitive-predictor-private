@@ -29,7 +29,7 @@
 
 #### 7. Exp_开头的程序为实验程序，画图
 
-``` python
+```
 Exp_drug_sensitive_normalize.py	-----	药物敏感性数据标准化
 Exp_feature_selection_comparision.py	------	特征选择对比
 Exp_feature_selection_feature_number.py	------	特征选择数量选择
