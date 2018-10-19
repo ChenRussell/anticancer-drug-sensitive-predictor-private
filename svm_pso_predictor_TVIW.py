@@ -35,7 +35,16 @@ class PSO_W():
         # self.r2 = 0.3
         self.pN = pN  # 粒子数量
         self.dim = dim  # 搜索维度
-        self.max_v = 10  # 最大速度
+
+        self.maxC = 10
+        self.minC = 0.00001
+        self.maxGamma = 5
+        self.minGamma = 0.00001
+        self.max_v = np.array([self.maxC, self.maxGamma])  # 最大速度
+        self.min_v = np.array([-self.maxC, -self.maxGamma])  # 最小速度（反方向）
+        self.max_x = np.array([self.maxC, self.maxGamma])  # 粒子位置的上界
+        self.min_x = np.array([self.minC, self.minGamma])  # 粒子位置的下界
+
         self.max_iter = max_iter  # 迭代次数
         self.X = np.zeros((self.pN, self.dim))  # 所有粒子的位置和速度
         self.V = np.zeros((self.pN, self.dim))
@@ -47,7 +56,7 @@ class PSO_W():
     # ---------------------目标函数Sphere函数-----------------------------
 
     def function(self, c, g):
-        if g < 0 or c < 0:
+        if g <= 0 or c <= 0:
             return 1e10
         model = svm.SVC(C=c, gamma=g)  # gamma缺省值为 1.0/x.shape[1]
         model.fit(self.x_train, self.y_train)
@@ -58,8 +67,8 @@ class PSO_W():
     def init_Population(self):
         for i in range(self.pN):
             for j in range(self.dim):
-                self.X[i][j] = random.uniform(0, 10)  # 位置的初始范围
-                self.V[i][j] = random.uniform(0, 10)  # 速度的初始范围
+                self.X[i][j] = random.uniform(self.min_x[j], self.max_x[j])  # 位置的初始范围
+                self.V[i][j] = random.uniform(self.min_v[j], self.max_v[j])  # 速度的初始范围
             self.pbest[i] = self.X[i]
             tmp = self.function(self.X[i][0], self.X[i][1])
             self.p_fit[i] = tmp
@@ -84,10 +93,24 @@ class PSO_W():
             self.r1 = random.uniform(0, 1)
             self.r2 = random.uniform(0, 1)
             for i in range(self.pN):
-                self.V[i] = self.w * self.V[i] + self.c1 * self.r1 * (self.pbest[i] - self.X[i]) + \
-                            self.c2 * self.r2 * (self.gbest - self.X[i])
-                self.V[i] = [self.max_v if v > self.max_v else v for v in self.V[i]]  # 当速度大于最大速度时，赋值为最大速度
-                self.X[i] = self.X[i] + self.V[i]
+                for d in range(self.dim):  # 对维度遍历
+                    self.V[i] = self.w * self.V[i] + self.c1 * self.r1 * (self.pbest[i] - self.X[i]) + \
+                                self.c2 * self.r2 * (self.gbest - self.X[i])
+
+                    # 限制粒子速度边界
+                    if self.V[i][d] > self.max_v[d]:
+                        self.V[i][d] = self.max_v[d]
+                    elif self.V[i][d] < self.min_v[d]:
+                        self.V[i][d] = self.min_v[d]
+
+                    self.X[i][d] = self.X[i][d] + self.V[i][d]  # 更新粒子位置
+
+                    # 限制粒子位置边界
+                    if self.X[i][d] > self.max_x[d]:
+                        self.X[i][d] = self.max_x[d]
+                    elif self.X[i][d] < self.min_x[d]:
+                        self.X[i][d] = self.min_x[d]
+
             fitness.append(self.fit)
 
             print('V: ', self.V[0], end=" ")

@@ -83,7 +83,7 @@ class PSO_K:
                         self.fit = self.p_fit[i]
             self.r1 = random.uniform(0, 1)
             self.r2 = random.uniform(0, 1)
-            for i in range(self.pN):    # 这里不需要对维度遍历，因为是一一对应的
+            for i in range(self.pN):    # 这里不需要对维度遍历，因为numpy是一一对应的
                 self.V[i] = self.K * (self.V[i] + self.c1 * self.r1 * (self.pbest[i] - self.X[i]) +
                                       self.c2 * self.r2 * (self.gbest - self.X[i]))
                 self.V[i] = [self.max_v if v > self.max_v else v for v in self.V[i]]  # 当速度大于最大速度时，赋值为最大速度
