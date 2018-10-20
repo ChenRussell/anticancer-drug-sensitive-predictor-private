@@ -25,8 +25,8 @@ class PSO_MTVAC():
         self.y_test = y_test
 
         self.w = 0.9  # 惯性权重
-        self.wS = 0.9
-        self.wE = 0.4
+        self.w_start = 0.9
+        self.w_end = 0.4
         self.c1 = 2
         self.c2 = 2
         self.c1f = 2.5
@@ -146,7 +146,7 @@ class PSO_MTVAC():
             self.c2 = (self.c2f - self.c2i) * iter / self.max_iter + self.c2i
 
             # 更新惯性权重
-            self.w = self.wS - (self.wS - self.wE) * iter / self.max_iter
+            self.w = self.w_start - (self.w_start - self.w_end) * iter / self.max_iter
         return fitness
 
         # ----------------------程序执行-----------------------
