@@ -7,7 +7,6 @@ from sklearn import svm
 from sklearn.model_selection import train_test_split
 import cmath
 
-
 data = pd.read_csv('data/drug_cell/drug/AEW541_train_data-rfe.csv')
 X = data.iloc[:, :-1]
 y = data.iloc[:, -1]
@@ -45,7 +44,7 @@ class PSO_MTVAC():
         self.pN = pN  # 粒子数量
         self.dim = dim  # 搜索维度
 
-        self.maxC = 1000
+        self.maxC = 100
         self.minC = 0.00001
         self.maxGamma = 5
         self.minGamma = 0.00001
@@ -104,21 +103,18 @@ class PSO_MTVAC():
             self.r2 = random.uniform(0, 1)
             self.r3 = random.uniform(0, 1)
             self.r4 = random.uniform(0, 1)
-            self.rp = random.randint(0, self.pN-1)  # 随机选择一个微粒(index)
-            self.rd = random.randint(0, self.dim-1)  # 随机选择一个维度(index)
+            self.rp = random.randint(0, self.pN - 1)  # 随机选择一个微粒(index)
+            self.rd = random.randint(0, self.dim - 1)  # 随机选择一个维度(index)
 
             for i in range(self.pN):
                 for d in range(self.dim):  # 对维度遍历
                     self.V[i][d] = self.w * self.V[i][d] + self.c1 * self.r1 * (self.pbest[i][d] - self.X[i][d]) + \
-                                self.c2 * self.r2 * (self.gbest[d] - self.X[i][d])
+                                   self.c2 * self.r2 * (self.gbest[d] - self.X[i][d])
 
-                    # 限制粒子速度边界
-                    if self.V[i][d] > self.max_v[d]:
-                        self.V[i][d] = self.max_v[d]
-                    elif self.V[i][d] < self.min_v[d]:
-                        self.V[i][d] = self.min_v[d]
+                    # 限制速度的简化代码
+                    self.V[i][d] = np.sign(self.V[i][d]) * min(abs(self.V[i][d]), self.max_v[d])
 
-                    self.X[i][d] = self.X[i][d] + self.V[i][d]   # 更新粒子位置
+                    self.X[i][d] = self.X[i][d] + self.V[i][d]  # 更新粒子位置
 
                     # 限制粒子位置边界
                     if self.X[i][d] > self.max_x[d]:
@@ -149,6 +145,7 @@ class PSO_MTVAC():
         return fitness
 
         # ----------------------程序执行-----------------------
+
 
 my_pso = PSO_MTVAC(pN=30, dim=2, max_iter=MAX_ITER)  # 维度代表变量的个数
 my_pso.init_Population()

@@ -115,9 +115,10 @@ class PSO_TVAC():
 
             fitness.append(self.fit)
 
-            print('V: ', self.V[0], end=" ")
-            print('X: ', self.X[0], end=" ")
-            print(self.fit, end=" ")  # 输出最优值
+            print('V: %.3f,%.3f' % (self.V[0][0], self.V[0][1]), end="\t")
+            print('X: %.3f,%.3f' % (self.X[0][0], self.X[0][1]), end="\t")
+            print('fit: %.4f' % self.fit, end="\t")  # 输出最优值
+            print('gBest: %.3f,%.3f' % (self.gbest[0], self.gbest[1]), end="\t")  # 输出gBest
             print('PSO-TVAC 当前迭代次数：', iter)
 
             # 更新学习因子

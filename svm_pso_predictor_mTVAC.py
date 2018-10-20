@@ -117,10 +117,13 @@ class PSO_MTVAC():
                                    self.c2 * self.r2 * (self.gbest[d] - self.X[i][d])
 
                     # 限制粒子速度边界
-                    if self.V[i][d] > self.max_v[d]:
-                        self.V[i][d] = self.max_v[d]
-                    elif self.V[i][d] < self.min_v[d]:
-                        self.V[i][d] = self.min_v[d]
+                    # if self.V[i][d] > self.max_v[d]:
+                    #     self.V[i][d] = self.max_v[d]
+                    # elif self.V[i][d] < self.min_v[d]:
+                    #     self.V[i][d] = self.min_v[d]
+
+                    # 限制速度的简化代码
+                    self.V[i][d] = np.sign(self.V[i][d]) * min(abs(self.V[i][d]), self.max_v[d])
 
                     self.X[i][d] = self.X[i][d] + self.V[i][d]  # 更新粒子位置
 
@@ -142,13 +145,20 @@ class PSO_MTVAC():
                             # self.V[self.rp][self.rd] += self.r3 * self.max_v[self.rd] / self.m
                             # 突变步长系数改为time varying, 大小用惯性权重
                             self.V[self.rp][self.rd] += self.w * self.max_v[self.rd] / self.m
+                            # 限制速度
+                            self.V[self.rp][self.rd] = np.sign(self.V[self.rp][self.rd]) * min(
+                                abs(self.V[self.rp][self.rd]), self.max_v[self.rd])
                         else:
                             # self.V[self.rp][self.rd] -= self.r4 * self.max_v[self.rd] / self.m
                             self.V[self.rp][self.rd] -= self.w * self.max_v[self.rd] / self.m
+                            # 限制速度
+                            self.V[self.rp][self.rd] = np.sign(self.V[self.rp][self.rd]) * min(
+                                abs(self.V[self.rp][self.rd]), self.max_v[self.rd])
 
-            print('V: ', self.V[0], end=" ")
-            print('X: ', self.X[0], end=" ")
-            print(self.fit, end=" ")  # 输出最优值
+            print('V: %.3f,%.3f' % (self.V[0][0], self.V[0][1]), end="\t")
+            print('X: %.3f,%.3f' % (self.X[0][0], self.X[0][1]), end="\t")
+            print('fit: %.4f' % self.fit, end="\t")  # 输出最优值
+            print('gBest: %.3f,%.3f' % (self.gbest[0], self.gbest[1]), end="\t")  # 输出gBest
             print('PSO-mTVAC 当前迭代次数：', iter)
 
             # 更新突变粒子个数
