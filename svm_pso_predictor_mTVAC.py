@@ -37,6 +37,11 @@ class PSO_MTVAC():
         self.r2 = random.uniform(0, 1)
         self.r3 = random.uniform(0, 1)
         self.r4 = random.uniform(0, 1)
+
+        # 突变相关的参数
+        self.mutation_num = pN / 3  # 初始值暂定为种群的大小除以2
+        self.mutation_num_start = pN / 3  # 初始值暂定为种群的大小除以2
+        self.mutation_num_end = pN / 10  # 初始值暂定为种群的大小除以2
         # self.mprop = random.uniform(0, 1)  # 突变概率
         self.mprop = 1  # 突变概率
         self.rp = random.randint(0, pN - 1)  # 随机选择一个微粒(index)
@@ -105,8 +110,6 @@ class PSO_MTVAC():
             self.r2 = random.uniform(0, 1)
             self.r3 = random.uniform(0, 1)
             self.r4 = random.uniform(0, 1)
-            self.rp = random.randint(0, self.pN - 1)  # 随机选择一个微粒(index)
-            self.rd = random.randint(0, self.dim - 1)  # 随机选择一个维度(index)
 
             for i in range(self.pN):
                 for d in range(self.dim):  # 对维度遍历
@@ -127,20 +130,33 @@ class PSO_MTVAC():
                     elif self.X[i][d] < self.min_x[d]:
                         self.X[i][d] = self.min_x[d]
 
-            fitness.append(self.fit)    # 追加全局最优
+            fitness.append(self.fit)  # 追加全局最优
 
             # 如果全局最优保持不变的话
             if len(fitness) >= 2 and (fitness[-1] - fitness[-2] <= 0):
-                if self.r1 < self.mprop:
-                    if self.r2 < 0.5:
-                        self.V[self.rp][self.rd] += self.r3 * self.max_v[self.rd] / self.m
-                    else:
-                        self.V[self.rp][self.rd] -= self.r4 * self.max_v[self.rd] / self.m
+                for mn in range(int(self.mutation_num)):  # 突变的粒子数量
+                    self.rp = random.randint(0, self.pN - 1)  # 随机选择一个微粒(index)
+                    self.rd = random.randint(0, self.dim - 1)  # 随机选择一个维度(index)
+                    if self.r1 < self.mprop:
+                        if self.r2 < 0.5:
+                            # self.V[self.rp][self.rd] += self.r3 * self.max_v[self.rd] / self.m
+                            # 突变步长系数改为time varying, 大小用惯性权重
+                            self.V[self.rp][self.rd] += self.w * self.max_v[self.rd] / self.m
+                        else:
+                            # self.V[self.rp][self.rd] -= self.r4 * self.max_v[self.rd] / self.m
+                            self.V[self.rp][self.rd] -= self.w * self.max_v[self.rd] / self.m
 
             print('V: ', self.V[0], end=" ")
             print('X: ', self.X[0], end=" ")
             print(self.fit, end=" ")  # 输出最优值
             print('PSO-mTVAC 当前迭代次数：', iter)
+
+            # 更新突变粒子个数
+            self.mutation_num = self.mutation_num_start - \
+                                (self.mutation_num_start - self.mutation_num_end) * iter / self.max_iter
+
+            # 强转成整型
+            self.mutation_num = int(self.mutation_num)
 
             # 更新学习因子
             self.c1 = (self.c1f - self.c1i) * iter / self.max_iter + self.c1i

@@ -106,6 +106,6 @@ for run in range(5000):
     plt.xticks(fontsize='14')
     # plt.rcParams['savefig.dpi'] = 300  # 图片像素
     # plt.rcParams['figure.dpi'] = 300  # 分辨率
-    plt.savefig('image/pso_m1.0/pso-compare%d.png' % (1+run))
+    plt.savefig('image/pso_m1.0_msTV_mnTV/pso-compare%d.png' % (1+run))
     # plt.show()
     plt.cla()
