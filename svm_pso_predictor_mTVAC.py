@@ -126,7 +126,7 @@ class PSO_MTVAC():
                     elif self.X[i][d] < self.min_x[d]:
                         self.X[i][d] = self.min_x[d]
 
-            fitness.append(self.fit)
+            fitness.append(self.fit)    # 追加全局最优
 
             # 如果全局最优保持不变的话
             if len(fitness) >= 2 and (fitness[-1] - fitness[-2] <= 0):

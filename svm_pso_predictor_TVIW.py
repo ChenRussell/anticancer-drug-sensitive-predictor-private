@@ -56,8 +56,8 @@ class PSO_W():
     # ---------------------目标函数Sphere函数-----------------------------
 
     def function(self, c, g):
-        if g <= 0 or c <= 0:
-            return 1e10
+        # if g <= 0 or c <= 0:
+        #     return 1e10
         model = svm.SVC(C=c, gamma=g)  # gamma缺省值为 1.0/x.shape[1]
         model.fit(self.x_train, self.y_train)
         y_score = model.score(self.x_test, self.y_test)
