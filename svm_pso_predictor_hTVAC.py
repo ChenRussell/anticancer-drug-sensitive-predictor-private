@@ -41,8 +41,17 @@ class PSO_HTVAC():
 
         self.pN = pN  # 粒子数量
         self.dim = dim  # 搜索维度
-        self.max_v = 10  # 最大速度
-        self.rv = random.uniform(0, self.max_v)
+
+        self.maxC = 10  # 惩罚因子C的最大值
+        self.minC = 0.00001  # 惩罚因子C的最小值
+        self.maxGamma = 5  # 参数gamma的最大值
+        self.minGamma = 0.00001  # 参数gamma的最小值
+        self.max_v = np.array([self.maxC, self.maxGamma])  # 最大速度
+        self.min_v = np.array([-self.maxC, -self.maxGamma])  # 最小速度，反方向
+        self.max_x = np.array([self.maxC, self.maxGamma])  # 粒子位置的上界
+        self.min_x = np.array([self.minC, self.minGamma])  # 粒子位置的下界
+
+        self.rv = random.uniform(0, self.max_v[random.randint(0, 1)])
         self.max_iter = max_iter  # 迭代次数
         self.X = np.zeros((self.pN, self.dim))  # 所有粒子的位置和速度
         self.V = np.zeros((self.pN, self.dim))
@@ -65,8 +74,8 @@ class PSO_HTVAC():
     def init_Population(self):
         for i in range(self.pN):
             for j in range(self.dim):
-                self.X[i][j] = random.uniform(0, 10)  # 位置的初始范围
-                self.V[i][j] = random.uniform(0, 10)  # 速度的初始范围
+                self.X[i][j] = random.uniform(self.min_x[j], self.max_x[j])  # 位置的初始范围
+                self.V[i][j] = random.uniform(self.min_v[j], self.max_v[j])  # 速度的初始范围
             self.pbest[i] = self.X[i]
             tmp = self.function(self.X[i][0], self.X[i][1])
             self.p_fit[i] = tmp
@@ -94,20 +103,28 @@ class PSO_HTVAC():
             self.r4 = random.uniform(0, 1)
             self.r5 = random.uniform(0, 1)
             for i in range(self.pN):
-                for d in range(self.dim):   # 对维度遍历
+                for d in range(self.dim):  # 对维度遍历
                     self.V[i][d] = self.c1 * self.r1 * (self.pbest[i][d] - self.X[i][d]) + \
                                    self.c2 * self.r2 * (self.gbest[d] - self.X[i][d])
 
-                    self.rv = random.uniform(0, 10)
+                    self.rv = random.uniform(0, self.max_v[d])
                     if self.V[i][d] == 0:
                         if self.r3 < 0.5:
                             self.V[i][d] = self.r4 * self.rv
                         else:
                             self.V[i][d] = -self.r5 * self.rv
-                    self.V[i][d] = np.sign(self.V[i][d]) * min(abs(self.V[i][d]), self.max_v)
+                    # 限制速度
+                    self.V[i][d] = np.sign(self.V[i][d]) * min(abs(self.V[i][d]), self.max_v[d])
 
-                    self.V[i][d] = self.max_v if self.V[i][d] > self.max_v else self.V[i][d]  # 当速度大于最大速度时，赋值为最大速度
+                    # self.V[i][d] = self.max_v if self.V[i][d] > self.max_v else self.V[i][d]  # 当速度大于最大速度时，赋值为最大速度
                     self.X[i][d] = self.X[i][d] + self.V[i][d]
+
+                    # 限制粒子位置边界
+                    if self.X[i][d] > self.max_x[d]:
+                        self.X[i][d] = self.max_x[d]
+                    elif self.X[i][d] < self.min_x[d]:
+                        self.X[i][d] = self.min_x[d]
+
             fitness.append(self.fit)
 
             print('V: ', self.V[0], end=" ")

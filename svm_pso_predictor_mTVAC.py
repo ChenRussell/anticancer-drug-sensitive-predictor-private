@@ -114,10 +114,13 @@ class PSO_MTVAC():
                                    self.c2 * self.r2 * (self.gbest[d] - self.X[i][d])
 
                     # 限制粒子速度边界
-                    if self.V[i][d] > self.max_v[d]:
-                        self.V[i][d] = self.max_v[d]
-                    elif self.V[i][d] < self.min_v[d]:
-                        self.V[i][d] = self.min_v[d]
+                    # if self.V[i][d] > self.max_v[d]:
+                    #     self.V[i][d] = self.max_v[d]
+                    # elif self.V[i][d] < self.min_v[d]:
+                    #     self.V[i][d] = self.min_v[d]
+
+                    # 限制速度的简化代码
+                    self.V[i][d] = np.sign(self.V[i][d]) * min(abs(self.V[i][d]), self.max_v[d])
 
                     self.X[i][d] = self.X[i][d] + self.V[i][d]  # 更新粒子位置
 
@@ -127,15 +130,21 @@ class PSO_MTVAC():
                     elif self.X[i][d] < self.min_x[d]:
                         self.X[i][d] = self.min_x[d]
 
-            fitness.append(self.fit)    # 追加全局最优
+            fitness.append(self.fit)  # 追加全局最优
 
             # 如果全局最优保持不变的话
             if len(fitness) >= 2 and (fitness[-1] - fitness[-2] <= 0):
                 if self.r1 < self.mprop:
                     if self.r2 < 0.5:
                         self.V[self.rp][self.rd] += self.r3 * self.max_v[self.rd] / self.m
+                        # 限制速度
+                        self.V[self.rp][self.rd] = np.sign(self.V[self.rp][self.rd]) * min(
+                            abs(self.V[self.rp][self.rd]), self.max_v[self.rd])
                     else:
                         self.V[self.rp][self.rd] -= self.r4 * self.max_v[self.rd] / self.m
+                        # 限制速度
+                        self.V[self.rp][self.rd] = np.sign(self.V[self.rp][self.rd]) * min(
+                            abs(self.V[self.rp][self.rd]), self.max_v[self.rd])
 
             print('V: ', self.V[0], end=" ")
             print('X: ', self.X[0], end=" ")
