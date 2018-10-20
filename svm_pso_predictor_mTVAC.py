@@ -37,7 +37,8 @@ class PSO_MTVAC():
         self.r2 = random.uniform(0, 1)
         self.r3 = random.uniform(0, 1)
         self.r4 = random.uniform(0, 1)
-        self.mprop = random.uniform(0, 1)  # 突变概率
+        # self.mprop = random.uniform(0, 1)  # 突变概率
+        self.mprop = 1  # 突变概率
         self.rp = random.randint(0, pN - 1)  # 随机选择一个微粒(index)
         self.rd = random.randint(0, dim - 1)  # 随机选择一个维度(index)
         self.m = 2  # 常量, 怎么取值？？？
