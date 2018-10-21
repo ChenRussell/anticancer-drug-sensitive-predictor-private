@@ -39,14 +39,18 @@ class PSO_MTVAC():
         self.r4 = random.uniform(0, 1)
 
         # 突变相关的参数
-        self.mutation_num = pN / 3  # 初始值暂定为种群的大小除以2
-        self.mutation_num_start = pN / 3  # 初始值暂定为种群的大小除以2
-        self.mutation_num_end = pN / 10  # 初始值暂定为种群的大小除以2
+        self.mutation_num = 5  # 初始值暂定为种群的大小除以3
+        self.mutation_num_start = 5  # 初始值暂定为种群的大小除以3
+        self.mutation_num_end = 1  # 结束值暂定为种群的大小除以10
         # self.mprop = random.uniform(0, 1)  # 突变概率
         self.mprop = 1  # 突变概率
         self.rp = random.randint(0, pN - 1)  # 随机选择一个微粒(index)
         self.rd = random.randint(0, dim - 1)  # 随机选择一个维度(index)
         self.m = 2  # 常量, 怎么取值？？？
+
+        self.ms = 0.9  # 惯性权重
+        self.ms_start = 0.9
+        self.ms_end = 0.1
 
         self.pN = pN  # 粒子数量
         self.dim = dim  # 搜索维度
@@ -144,13 +148,13 @@ class PSO_MTVAC():
                         if self.r2 < 0.5:
                             # self.V[self.rp][self.rd] += self.r3 * self.max_v[self.rd] / self.m
                             # 突变步长系数改为time varying, 大小用惯性权重
-                            self.V[self.rp][self.rd] += self.w * self.max_v[self.rd] / self.m
+                            self.V[self.rp][self.rd] += self.ms * self.max_v[self.rd] / self.m
                             # 限制速度
                             self.V[self.rp][self.rd] = np.sign(self.V[self.rp][self.rd]) * min(
                                 abs(self.V[self.rp][self.rd]), self.max_v[self.rd])
                         else:
                             # self.V[self.rp][self.rd] -= self.r4 * self.max_v[self.rd] / self.m
-                            self.V[self.rp][self.rd] -= self.w * self.max_v[self.rd] / self.m
+                            self.V[self.rp][self.rd] -= self.ms * self.max_v[self.rd] / self.m
                             # 限制速度
                             self.V[self.rp][self.rd] = np.sign(self.V[self.rp][self.rd]) * min(
                                 abs(self.V[self.rp][self.rd]), self.max_v[self.rd])
@@ -174,6 +178,9 @@ class PSO_MTVAC():
 
             # 更新惯性权重
             self.w = self.w_start - (self.w_start - self.w_end) * iter / self.max_iter
+
+            # 更新突变步长系数
+            self.ms = self.ms_start - (self.ms_start - self.ms_end) * iter / self.max_iter
         return fitness
 
         # ----------------------程序执行-----------------------
