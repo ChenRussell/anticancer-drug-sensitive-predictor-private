@@ -22,8 +22,8 @@ print(y_train)
 # print(X, len(X))
 # print(y, len(y))
 #
-# model = svm.SVC(C=0.26678762, gamma=0.02152877)  # gamma缺省值为 1.0/x.shape[1]
-model = svm.SVC(C=0.1)
+model = svm.SVC(C=0.26678762, gamma=0.02152877)  # gamma缺省值为 1.0/x.shape[1]
+# model = svm.SVC(C=0.1)
 model.fit(x_train, y_train)
 y_score = model.decision_function(x_test)
 print("score: ", model.score(x_test, y_test))

@@ -15,7 +15,7 @@ y_test = data_test.iloc[:, -1]
 # y = y.as_matrix()
 
 #
-model = svm.SVC(C=5)    # gamma缺省值为 1.0/x.shape[1]
+model = svm.SVC(C=5)  # gamma缺省值为 1.0/x.shape[1]
 model.fit(X, y)
 y_score = model.decision_function(x_test)
 print(model.score(x_test, y_test))
