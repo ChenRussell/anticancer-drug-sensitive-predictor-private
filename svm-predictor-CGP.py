@@ -27,7 +27,7 @@ roc_auc = auc(fpr, tpr)  ###计算auc的值
 lw = 2
 plt.figure(figsize=(10, 10))
 plt.plot(fpr, tpr, color='red',
-         lw=lw, label='ROC curve (AUC = %0.2f)' % roc_auc)  ###假正率为横坐标，真正率为纵坐标做曲线
+         lw=lw, label='ROC curve (AUC = %0.2f)' % roc_auc, marker='o')  ###假正率为横坐标，真正率为纵坐标做曲线
 plt.plot([0, 1], [0, 1], color='navy', lw=lw, linestyle='--')
 plt.xlim([0.0, 1.0])
 plt.ylim([0.0, 1.05])

@@ -15,7 +15,8 @@ import time
 # data = pd.read_csv('data/drug_cell/drug/PLX4720_train_data.csv')  # feature number选择7  没有负样本，不能运行
 # data = pd.read_csv('data/drug_cell/drug/AZD0530_train_data.csv')  # feature number选择11
 # data = pd.read_csv('data/drug_cell/drug/LBW242_train_data.csv')  # feature number选择6
-data = pd.read_csv('data/drug_cell/drug/Nutlin-3_train_data.csv')  # feature number选择9
+# data = pd.read_csv('data/drug_cell/drug/Nutlin-3_train_data.csv')  # feature number选择9
+data = pd.read_csv('data/drug_cell/drug/Panobinostat_train_data.csv')  # feature number选择9
 data = data.fillna(0)
 x = data.iloc[:, :-1]
 y = data.iloc[:, -1]
@@ -31,4 +32,4 @@ print("特征选择运行时间：", end - start)
 x_new = x.loc[:, rfe.get_support()]
 x_new['label'] = y
 print(x_new)
-x_new.to_csv('data/drug_cell/drug/Nutlin-3_train_data-rfe.csv', index=False, float_format='%.2f')
+x_new.to_csv('data/drug_cell/drug/Panobinostat_train_data-rfe.csv', index=False, float_format='%.2f')
