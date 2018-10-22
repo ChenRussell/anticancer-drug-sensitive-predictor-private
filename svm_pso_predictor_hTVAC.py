@@ -42,7 +42,7 @@ class PSO_HTVAC():
         self.pN = pN  # 粒子数量
         self.dim = dim  # 搜索维度
 
-        self.maxC = 10  # 惩罚因子C的最大值
+        self.maxC = 1000  # 惩罚因子C的最大值
         self.minC = 0.00001  # 惩罚因子C的最小值
         self.maxGamma = 5  # 参数gamma的最大值
         self.minGamma = 0.00001  # 参数gamma的最小值
@@ -127,10 +127,11 @@ class PSO_HTVAC():
 
             fitness.append(self.fit)
 
-            print('V: ', self.V[0], end=" ")
-            print('X: ', self.X[0], end=" ")
-            print(self.fit, end=" ")  # 输出最优值
-            print('PSO-mTVAC 当前迭代次数：', iter)
+            print('V: %.5f,%.5f' % (self.V[0][0], self.V[0][1]), end="\t")
+            print('X: %.5f,%.5f' % (self.X[0][0], self.X[0][1]), end="\t")
+            print('fit: %.4f' % self.fit, end="\t")  # 输出最优值
+            print('gBest: %.5f,%.5f' % (self.gbest[0], self.gbest[1]), end="\t")  # 输出gBest
+            print('PSO-hTVAC 当前迭代次数：', iter)
 
             # 更新学习因子
             self.c1 = (self.c1f - self.c1i) * iter / self.max_iter + self.c1i

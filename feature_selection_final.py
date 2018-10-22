@@ -3,15 +3,16 @@ from sklearn.feature_selection import RFE
 import pandas as pd
 import time
 
-# data = pd.read_csv('data/drug_cell/drug/17-AAG_train_data.csv')
-# data = pd.read_csv('data/drug_cell/drug/Erlotinib_train_data.csv')
-# data = pd.read_csv('data/drug_cell/drug/Irinotecan_train_data.csv') # feature number选择9
-# data = pd.read_csv('data/drug_cell/drug/AZD6244_train_data.csv') # feature number选择10,    0.893939393939
-# data = pd.read_csv('data/drug_cell/drug/Lapatinib_train_data.csv') # feature number选择7
+# data = pd.read_csv('data/drug_cell/drug/17-AAG_train_data.csv')   # feature number选择10
+# data = pd.read_csv('data/drug_cell/drug/Erlotinib_train_data.csv') 0.9245 # feature number选择10
+# data = pd.read_csv('data/drug_cell/drug/Irinotecan_train_data.csv') # feature number选择9, 0.8404
+# data = pd.read_csv('data/drug_cell/drug/AZD6244_train_data.csv') # feature number选择12, 0.9394
+# data = pd.read_csv('data/drug_cell/drug/Lapatinib_train_data.csv') # feature number选择7 0.8704
 # data = pd.read_csv('data/drug_cell/drug/PD-0325901_train_data.csv') # feature number选择7
-# data = pd.read_csv('data/drug_cell/drug/AEW541_train_data.csv') # feature number选择7  最高就0.666666666667
+# data = pd.read_csv('data/drug_cell/drug/AEW541_train_data.csv') # feature number选择7  0.8095
 # data = pd.read_csv('data/drug_cell/drug/PHA-665752_train_data.csv') # feature number选择3  最高就0.666666666667
-# data = pd.read_csv('data/drug_cell/drug/Paclitaxel_train_data.csv')  # feature number选择11  最高就0.666666666667
+# data = pd.read_csv('data/drug_cell/drug/Paclitaxel_train_data.csv')  # feature number选择11  0.885714285714
+# data = pd.read_csv('data/drug_cell/drug/Sorafenib_train_data.csv')  # feature number选择9  0.8679
 data = pd.read_csv('data/drug_cell/drug/PLX4720_train_data.csv')  # feature number选择7  没有负样本，不能运行
 data = data.fillna(0)
 x = data.iloc[:, :-1]
