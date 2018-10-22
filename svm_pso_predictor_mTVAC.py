@@ -39,8 +39,8 @@ class PSO_MTVAC():
         self.r4 = random.uniform(0, 1)
 
         # 突变相关的参数
-        self.mutation_num = 5  # 初始值暂定为种群的大小除以3
-        self.mutation_num_start = 5  # 初始值暂定为种群的大小除以3
+        self.mutation_num = 1  # 初始值暂定为种群的大小除以3
+        self.mutation_num_start = 1  # 初始值暂定为种群的大小除以3
         self.mutation_num_end = 1  # 结束值暂定为种群的大小除以10
         self.mprop = random.uniform(0, 1)  # 突变概率
         # self.mprop = 1  # 突变概率

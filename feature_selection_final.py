@@ -16,13 +16,16 @@ import time
 # data = pd.read_csv('data/drug_cell/drug/PLX4720_train_data.csv')  # feature number选择7  没有负样本，不能运行
 # data = pd.read_csv('data/drug_cell/drug/AZD0530_train_data.csv')  # feature number选择11 0.8308
 # data = pd.read_csv('data/drug_cell/drug/LBW242_train_data.csv')  # feature number选择6 0.8000
-data = pd.read_csv('data/drug_cell/drug/Nutlin-3_train_data.csv')  # feature number选择9
+# data = pd.read_csv('data/drug_cell/drug/Nutlin-3_train_data.csv')  # feature number选择9
+# data = pd.read_csv('data/drug_cell/drug/Panobinostat_train_data.csv')  # feature number选择14
+# data = pd.read_csv('data/drug_cell/drug/PD-0332991_train_data.csv')  # feature number选择8
+data = pd.read_csv('data/drug_cell/drug/PF2341066_train_data.csv')  # feature number选择10
 
 data = data.fillna(0)
 x = data.iloc[:, :-1]
 y = data.iloc[:, -1]
 svc = SVC(kernel="linear", C=1)
-rfe = RFE(estimator=svc, n_features_to_select=9, step=1)
+rfe = RFE(estimator=svc, n_features_to_select=10, step=1)
 start = time.time()
 print('算法运行开始......')
 rfe.fit(x, y)  # 训练时间特别长！！！
@@ -33,4 +36,4 @@ print("特征选择运行时间：", end - start)
 x_new = x.loc[:, rfe.get_support()]
 x_new['label'] = y
 print(x_new)
-x_new.to_csv('data/drug_cell/drug/Nutlin-3_train_data-rfe.csv', index=False, float_format='%.2f')
+x_new.to_csv('data/drug_cell/drug/PF2341066_train_data-rfe.csv', index=False, float_format='%.2f')
