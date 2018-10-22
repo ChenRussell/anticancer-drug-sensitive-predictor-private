@@ -56,4 +56,4 @@ print(data_normalize)
 # ['Erlotinib', 'Lapatinib', 'Nilotinib--discard', 'PHA-665752', 'Paclitaxel',
 #        'Sorafenib']
 # PD0325901
-# PLX-4720
+# PLX-4720--discard(没有1样本)

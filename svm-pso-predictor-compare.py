@@ -17,7 +17,7 @@ from svm_pso_predictor_RANDIW import PSO_RW
 import time
 
 
-data = pd.read_csv('data/drug_cell/drug/AEW541_train_data-rfe.csv')
+data = pd.read_csv('data/drug_cell/drug/Erlotinib_train_data-rfe.csv')
 X = data.iloc[:, :-1]
 y = data.iloc[:, -1]
 x_train, x_test, y_train, y_test = train_test_split(X, y, random_state=1, train_size=0.7)
@@ -106,6 +106,6 @@ for run in range(5000):
     plt.xticks(fontsize='14')
     # plt.rcParams['savefig.dpi'] = 300  # 图片像素
     # plt.rcParams['figure.dpi'] = 300  # 分辨率
-    plt.savefig('image/pso_m-rand_ms0.9-0.1TV/pso-compare%d.png' % (1+run))
+    plt.savefig('image/pso_m-rand_ms0.9-0.1TV/Erlotinib/pso-compare%d.png' % (1+run))
     # plt.show()
     plt.cla()

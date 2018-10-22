@@ -4,7 +4,7 @@ from sklearn import svm
 from sklearn.metrics import roc_curve, auc  ###计算roc和auc
 import matplotlib.pyplot as plt
 
-data = pd.read_csv('data/drug_cell/drug/AEW541_train_data-rfe.csv')
+data = pd.read_csv('data/drug_cell/drug/Erlotinib_train_data-rfe.csv')
 X = data.iloc[:, :-1]
 y = data.iloc[:, -1]
 # X = X.as_matrix()
@@ -22,7 +22,7 @@ print(y_train)
 # print(X, len(X))
 # print(y, len(y))
 #
-model = svm.SVC(C=0.26678762, gamma=0.02152877)  # gamma缺省值为 1.0/x.shape[1]
+model = svm.SVC(C=573.32371, gamma=0.00006)  # gamma缺省值为 1.0/x.shape[1]
 # model = svm.SVC(C=0.1)
 model.fit(x_train, y_train)
 y_score = model.decision_function(x_test)

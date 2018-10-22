@@ -15,6 +15,10 @@ data = pd.read_csv('data/feature_select_numbers.csv')
 data.set_index('feature_numbers', inplace=True, drop=True)
 print(data)
 data.plot(subplots=1, kind='line')
+
+plt.legend(fontsize=16)
+plt.yticks(fontsize='14')
+plt.xticks(fontsize='14')
 # 设置坐标轴名称
 plt.xlabel('feature numbers')
 plt.ylabel('model accuracy')

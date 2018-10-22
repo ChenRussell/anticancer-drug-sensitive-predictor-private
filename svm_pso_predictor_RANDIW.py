@@ -34,7 +34,7 @@ class PSO_RW():
         self.pN = pN  # 粒子数量
         self.dim = dim  # 搜索维度
 
-        self.maxC = 10
+        self.maxC = 1000
         self.minC = 0.00001
         self.maxGamma = 5
         self.minGamma = 0.00001
@@ -110,9 +110,10 @@ class PSO_RW():
                         self.X[i][d] = self.min_x[d]
             fitness.append(self.fit)
 
-            print('V: ', self.V[0], end=" ")
-            print('X: ', self.X[0], end=" ")
-            print(self.fit, end=" ")  # 输出最优值
+            print('V: %.5f,%.5f' % (self.V[0][0], self.V[0][1]), end="\t")
+            print('X: %.5f,%.5f' % (self.X[0][0], self.X[0][1]), end="\t")
+            print('fit: %.4f' % self.fit, end="\t")  # 输出最优值
+            print('gBest: %.5f,%.5f' % (self.gbest[0], self.gbest[1]), end="\t")  # 输出gBest
             print('PSO-RANDIW 当前迭代次数：', iter)
 
             # 更新惯性权重
