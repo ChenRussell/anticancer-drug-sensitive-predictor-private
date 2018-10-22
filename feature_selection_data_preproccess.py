@@ -34,7 +34,10 @@ print(data_unstack.head(5))
 # drug_info = pd.read_csv('data/drug_cell/drug/PHA-665752.csv', header=None) -c
 # drug_info = pd.read_csv('data/drug_cell/drug/Paclitaxel.csv', header=None) -c
 # drug_info = pd.read_csv('data/drug_cell/drug/Sorafenib.csv', header=None) -c
-drug_info = pd.read_csv('data/drug_cell/drug/PLX4720.csv', header=None)
+# drug_info = pd.read_csv('data/drug_cell/drug/PLX4720.csv', header=None) -c
+# drug_info = pd.read_csv('data/drug_cell/drug/AZD0530.csv', header=None)
+# drug_info = pd.read_csv('data/drug_cell/drug/LBW242.csv', header=None)
+drug_info = pd.read_csv('data/drug_cell/drug/Nutlin-3.csv', header=None)
 # print(drug_info)
 drug_info_cell_Col = drug_info[0]  # 选择cell列
 # print(drug_info_cell_Col)
@@ -48,4 +51,4 @@ data_unstack_select = data_unstack.loc[drug_info_cell_Col]
 # print(data_unstack_select)
 data_unstack_select['label'] = drug_info_label_Col.values
 print(data_unstack_select)
-data_unstack_select.to_csv('data/drug_cell/drug/PLX4720_train_data.csv', index=False, float_format='%.2f')
+data_unstack_select.to_csv('data/drug_cell/drug/Nutlin-3_train_data.csv', index=False, float_format='%.2f')

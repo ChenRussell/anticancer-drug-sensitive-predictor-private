@@ -5,8 +5,8 @@ from sklearn.metrics import roc_curve, auc  ###计算roc和auc
 import matplotlib.pyplot as plt
 
 # 0样本很多，1样本很少，得到的准确率都很高
-data = pd.read_csv('data/drug_cell/drug/Lapatinib_train_data-rfe.csv')
-data_test = pd.read_csv('data/CGP/drug_cell/common_drugs/Lapatinib_train_data.csv')
+data = pd.read_csv('data/drug_cell/drug/Sorafenib_train_data-rfe.csv')
+data_test = pd.read_csv('data/CGP/drug_cell/common_drugs/Sorafenib_train_data.csv')
 X = data.iloc[:, :-1]
 y = data.iloc[:, -1]
 
@@ -34,7 +34,7 @@ plt.xlim([0.0, 1.0])
 plt.ylim([0.0, 1.05])
 plt.xlabel('False Positive Rate', fontsize=15)
 plt.ylabel('True Positive Rate', fontsize=15)
-plt.title('Lapatinib', fontsize=20)
+plt.title('Sorafenib', fontsize=20)
 plt.legend(loc="lower right", fontsize=20)
 # plt.savefig('image/svm_roc1.png')
 plt.show()
