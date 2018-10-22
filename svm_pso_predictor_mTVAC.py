@@ -42,8 +42,8 @@ class PSO_MTVAC():
         self.mutation_num = 5  # 初始值暂定为种群的大小除以3
         self.mutation_num_start = 5  # 初始值暂定为种群的大小除以3
         self.mutation_num_end = 1  # 结束值暂定为种群的大小除以10
-        # self.mprop = random.uniform(0, 1)  # 突变概率
-        self.mprop = 1  # 突变概率
+        self.mprop = random.uniform(0, 1)  # 突变概率
+        # self.mprop = 1  # 突变概率
         self.rp = random.randint(0, pN - 1)  # 随机选择一个微粒(index)
         self.rd = random.randint(0, dim - 1)  # 随机选择一个维度(index)
         self.m = 2  # 常量, 怎么取值？？？
