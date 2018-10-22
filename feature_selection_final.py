@@ -3,19 +3,19 @@ from sklearn.feature_selection import RFE
 import pandas as pd
 import time
 
-# data = pd.read_csv('data/drug_cell/drug/17-AAG_train_data.csv')   # feature number选择10
-# data = pd.read_csv('data/drug_cell/drug/Erlotinib_train_data.csv') 0.9245 # feature number选择10
+# data = pd.read_csv('data/drug_cell/drug/17-AAG_train_data.csv')   # feature number选择10 0.8529
+# data = pd.read_csv('data/drug_cell/drug/Erlotinib_train_data.csv') # feature number选择10 0.9245
 # data = pd.read_csv('data/drug_cell/drug/Irinotecan_train_data.csv') # feature number选择9, 0.8404
 # data = pd.read_csv('data/drug_cell/drug/AZD6244_train_data.csv') # feature number选择12, 0.9394
 # data = pd.read_csv('data/drug_cell/drug/Lapatinib_train_data.csv') # feature number选择7 0.8704
-# data = pd.read_csv('data/drug_cell/drug/PD-0325901_train_data.csv') # feature number选择7
+# data = pd.read_csv('data/drug_cell/drug/PD-0325901_train_data.csv') # feature number选择7 0.9412
 # data = pd.read_csv('data/drug_cell/drug/Sorafenib_train_data.csv')  # feature number选择9  0.8679
 # data = pd.read_csv('data/drug_cell/drug/AEW541_train_data.csv') # feature number选择7  最高就 0.8095
-# data = pd.read_csv('data/drug_cell/drug/PHA-665752_train_data.csv') # feature number选择10  最高就0.666666666667
-# data = pd.read_csv('data/drug_cell/drug/Paclitaxel_train_data.csv')  # feature number选择11  最高就0.8857
+# data = pd.read_csv('data/drug_cell/drug/PHA-665752_train_data.csv') # feature number选择10  0.8214
+# data = pd.read_csv('data/drug_cell/drug/Paclitaxel_train_data.csv')  # feature number选择11  0.8857
 # data = pd.read_csv('data/drug_cell/drug/PLX4720_train_data.csv')  # feature number选择7  没有负样本，不能运行
-# data = pd.read_csv('data/drug_cell/drug/AZD0530_train_data.csv')  # feature number选择11
-# data = pd.read_csv('data/drug_cell/drug/LBW242_train_data.csv')  # feature number选择6
+# data = pd.read_csv('data/drug_cell/drug/AZD0530_train_data.csv')  # feature number选择11 0.8308
+# data = pd.read_csv('data/drug_cell/drug/LBW242_train_data.csv')  # feature number选择6 0.8000
 data = pd.read_csv('data/drug_cell/drug/Nutlin-3_train_data.csv')  # feature number选择9
 
 data = data.fillna(0)
