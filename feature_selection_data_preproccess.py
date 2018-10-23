@@ -34,7 +34,7 @@ print(data_unstack.head(5))
 # drug_info = pd.read_csv('data/drug_cell/drug/PHA-665752.csv', header=None) -c
 # drug_info = pd.read_csv('data/drug_cell/drug/Paclitaxel.csv', header=None) -c
 # drug_info = pd.read_csv('data/drug_cell/drug/Sorafenib.csv', header=None) -c
-# drug_info = pd.read_csv('data/drug_cell/drug/PLX4720.csv', header=None) -c
+# drug_info = pd.read_csv('data/drug_cell/drug/PLX4720.csv', header=None) -c -discard
 # drug_info = pd.read_csv('data/drug_cell/drug/AZD0530.csv', header=None)
 # drug_info = pd.read_csv('data/drug_cell/drug/LBW242.csv', header=None)
 # drug_info = pd.read_csv('data/drug_cell/drug/Nutlin-3.csv', header=None)

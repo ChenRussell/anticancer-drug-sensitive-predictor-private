@@ -17,10 +17,10 @@ from svm_pso_predictor_RANDIW import PSO_RW
 import time
 
 
-data = pd.read_csv('data/drug_cell/drug/17-AAG_train_data-rfe.csv')
+data = pd.read_csv('data/drug_cell/drug/Panobinostat_train_data-rfe.csv')
 X = data.iloc[:, :-1]
 y = data.iloc[:, -1]
-x_train, x_test, y_train, y_test = train_test_split(X, y, random_state=1, train_size=0.7)
+x_train, x_test, y_train, y_test = train_test_split(X, y, random_state=1, train_size=0.6)
 
 MAX_ITER = 1000
 
@@ -106,6 +106,6 @@ for run in range(50):
     plt.xticks(fontsize='14')
     # plt.rcParams['savefig.dpi'] = 300  # 图片像素
     # plt.rcParams['figure.dpi'] = 300  # 分辨率
-    plt.savefig('image/pso_TVAC/17-AAG/pso-compare-17-AAG-%d.png' % (1+run))
-    plt.show()
-    # plt.cla()
+    plt.savefig('image/pso_TVAC/Panobinostat/pso-compare-Panobinostat-%d.png' % (50+run))
+    # plt.show()
+    plt.cla()
