@@ -17,7 +17,7 @@ import cmath
 
 
 # ----------------------PSO参数设置---------------------------------
-class PSO_MTVAC():
+class PSO_MHTVAC():
     def __init__(self, max_iter, x_train, y_train, x_test, y_test, pN=30, dim=2):
         self.x_train = x_train
         self.y_train = y_train
@@ -38,9 +38,6 @@ class PSO_MTVAC():
         self.r3 = random.uniform(0, 1)
         self.r4 = random.uniform(0, 1)
         self.r5 = random.uniform(0, 1)
-
-        # 随机速度
-        self.rv = random.uniform(0, self.max_v[random.randint(0, 1)])
 
         # 突变相关的参数
         self.mutation_num = 1  # 初始值暂定为种群的大小除以3
@@ -67,6 +64,9 @@ class PSO_MTVAC():
         self.min_v = np.array([-self.maxC, -self.maxGamma])  # 最小速度，反方向
         self.max_x = np.array([self.maxC, self.maxGamma])  # 粒子位置的上界
         self.min_x = np.array([self.minC, self.minGamma])  # 粒子位置的下界
+
+        # 随机速度
+        self.rv = random.uniform(0, self.max_v[random.randint(0, 1)])
 
         self.max_iter = max_iter  # 迭代次数
         self.X = np.zeros((self.pN, self.dim))  # 所有粒子的位置和速度
@@ -170,7 +170,7 @@ class PSO_MTVAC():
             print('X: %.5f,%.5f' % (self.X[0][0], self.X[0][1]), end="\t")
             print('fit: %.4f' % self.fit, end="\t")  # 输出最优值
             print('gBest: %.5f,%.5f' % (self.gbest[0], self.gbest[1]), end="\t")  # 输出gBest
-            print('PSO-mTVAC 当前迭代次数：', iter)
+            print('PSO-mhTVAC 当前迭代次数：', iter)
 
             # 更新突变粒子个数
             # self.mutation_num = self.mutation_num_start - \

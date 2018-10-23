@@ -10,6 +10,7 @@ from svm_pso_predictor_K import PSO_K
 from svm_pso_predictor_TVIW import PSO_W
 from svm_pso_predictor_TVAC import PSO_TVAC
 from svm_pso_predictor_mTVAC import PSO_MTVAC
+from svm_pso_predictor_mhTVAC import PSO_MHTVAC
 from svm_pso_predictor_mTVAC_RIW import PSO_MTVACRW
 from svm_pso_predictor_hTVAC import PSO_HTVAC
 from svm_pso_predictor_original import PSO
@@ -17,7 +18,7 @@ from svm_pso_predictor_RANDIW import PSO_RW
 import time
 
 
-data = pd.read_csv('data/drug_cell/drug/Panobinostat_train_data-rfe.csv')
+data = pd.read_csv('data/drug_cell/drug/PD-0332991_train_data-rfe.csv')
 X = data.iloc[:, :-1]
 y = data.iloc[:, -1]
 x_train, x_test, y_train, y_test = train_test_split(X, y, random_state=1, train_size=0.6)
@@ -59,15 +60,20 @@ for run in range(50):
     pso_hTVAC.init_Population()
     fitness_hTVAC = pso_hTVAC.iterator()
 
-    # pso_original = PSO(max_iter=MAX_ITER, x_train=x_train, y_train=y_train, x_test=x_test,
-    #                    y_test=y_test)  # 维度代表变量的个数
-    # pso_original.init_Population()
-    # fitness_original = pso_original.iterator()
+    pso_mhTVAC = PSO_MHTVAC(max_iter=MAX_ITER, x_train=x_train, y_train=y_train, x_test=x_test,
+                        y_test=y_test)  # 维度代表变量的个数
+    pso_mhTVAC.init_Population()
+    fitness_mhTVAC = pso_mhTVAC.iterator()
 
-    pso_RW = PSO_RW(max_iter=MAX_ITER, x_train=x_train, y_train=y_train, x_test=x_test,
+    pso_original = PSO(max_iter=MAX_ITER, x_train=x_train, y_train=y_train, x_test=x_test,
                        y_test=y_test)  # 维度代表变量的个数
-    pso_RW.init_Population()
-    fitness_RW = pso_RW.iterator()
+    pso_original.init_Population()
+    fitness_original = pso_original.iterator()
+
+    # pso_RW = PSO_RW(max_iter=MAX_ITER, x_train=x_train, y_train=y_train, x_test=x_test,
+    #                    y_test=y_test)  # 维度代表变量的个数
+    # pso_RW.init_Population()
+    # fitness_RW = pso_RW.iterator()
 
     end = time.time()
     # -------------------画图--------------------
@@ -89,23 +95,26 @@ for run in range(50):
 
     fitness_hTVAC2 = [-v for v in fitness_hTVAC]  # 取反，得到正数，模型准确率
 
-    # pso_original2 = [-v for v in fitness_original]  # 取反，得到正数，模型准确率
+    fitness_mhTVAC2 = [-v for v in fitness_mhTVAC]  # 取反，得到正数，模型准确率
 
-    fitness_RW2 = [-v for v in fitness_RW]  # 取反，得到正数，模型准确率
+    pso_original2 = [-v for v in fitness_original]  # 取反，得到正数，模型准确率
+
+    # fitness_RW2 = [-v for v in fitness_RW]  # 取反，得到正数，模型准确率
 
     # plt.plot(t, fitness_K2, color='b', linewidth=3, label='PSO-K')
-    # plt.plot(t, pso_original2, color='b', linewidth=3, label='PSO', ls='-.')
+    plt.plot(t, pso_original2, color='b', linewidth=3.2, label='PSO', ls='-.')
     # plt.plot(t, fitness_W2, color='r', linewidth=3, label='PSO-TVIW', ls=':')
-    plt.plot(t, fitness_TVAC2, color='g', linewidth=3, label='PSO-TVAC', ls='--')
-    plt.plot(t, fitness_RW2, color='lightblue', linewidth=3, label='PSO-RANDIW', ls='-')
+    plt.plot(t, fitness_TVAC2, color='g', linewidth=3.1, label='PSO-TVAC', ls='--')
+    # plt.plot(t, fitness_RW2, color='lightblue', linewidth=3, label='PSO-RANDIW', ls='-')
     plt.plot(t, fitness_mTVAC2, color='orange', linewidth=3, label='PSO-mTVAC', ls=':')
+    plt.plot(t, fitness_mhTVAC2, color='red', linewidth=2.9, label='PSO-mhTVAC')
     # plt.plot(t, fitness_mTVACRW2, color='black', linewidth=3, label='PSO-mTVACRW')
-    plt.plot(t, fitness_hTVAC2, color='yellow', linewidth=3, label='PSO-hTVAC')
+    plt.plot(t, fitness_hTVAC2, color='yellow', linewidth=2.8, label='PSO-hTVAC')
     plt.legend(loc="lower right", fontsize=16)
     plt.yticks(fontsize='14')
     plt.xticks(fontsize='14')
     # plt.rcParams['savefig.dpi'] = 300  # 图片像素
     # plt.rcParams['figure.dpi'] = 300  # 分辨率
-    plt.savefig('image/pso_TVAC/Panobinostat/pso-compare-Panobinostat-%d.png' % (50+run))
+    plt.savefig('image/pso_TVAC/PD-0332991/pso-compare-PD-0332991-%d.png' % (1+run))
     # plt.show()
     plt.cla()

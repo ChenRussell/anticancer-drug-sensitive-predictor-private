@@ -14,14 +14,46 @@ indexs = ['17-AAG', 'AEW541', 'AZD0530', 'AZD6244', 'Erlotinib', 'Irinotecan', '
 data = pd.read_csv('data/feature_select_numbers.csv')
 data.set_index('feature_numbers', inplace=True, drop=True)
 print(data)
-data.plot(subplots=1, kind='line')
-
+# data.plot(kind='line')
+x = data.index
+y1 = data['17-AAG']
+y2 = data['AEW541']
+y3 = data['AZD0530']
+y4 = data['AZD6244']
+plt.subplot(411)
+plt.plot(x, y1, color='b', linewidth=3, label='17-AAG')  # , ls='-.', marker='o', ms=10)
 plt.legend(fontsize=16)
-plt.yticks(fontsize='14')
-plt.xticks(fontsize='14')
+plt.yticks(fontsize=14)
+plt.xticks(fontsize=14)
+plt.grid(True)
+
+plt.subplot(412)
+plt.plot(x, y2, color='r', linewidth=3, label='AEW541')  # , ls=':', marker='^', ms=10)
+plt.legend(fontsize=16)
+plt.yticks(fontsize=14)
+plt.xticks(fontsize=14)
+plt.grid(True)
+plt.ylabel('Accuracy    Rate', fontsize=16)
+
+plt.subplot(413)
+plt.plot(x, y3, color='g', linewidth=3, label='AZD0530')  # , ls='--', marker='>', ms=10)
+plt.legend(fontsize=16)
+plt.yticks(fontsize=14)
+plt.xticks(fontsize=14)
+plt.grid(True)
+plt.ylabel('SVM     Model', fontsize=16)
+
+plt.subplot(414)
+plt.plot(x, y4, color='orange', linewidth=3, label='AZD6244')  # , ls='-', marker='<', ms=10)
+
+# plt.subplot(221)
+plt.legend(fontsize=16)
+plt.yticks(fontsize=14)
+plt.xticks(fontsize=14)
 # 设置坐标轴名称
-plt.xlabel('feature numbers')
-plt.ylabel('model accuracy')
+plt.xlabel('feature numbers', fontsize=18)
+
+plt.grid(True)
 # plt.xticks(rotation=45)
 # plt.savefig('image/feature_select_experiment.png')
 plt.show()

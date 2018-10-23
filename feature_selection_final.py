@@ -16,9 +16,9 @@ import time
 # data = pd.read_csv('data/drug_cell/drug/PLX4720_train_data.csv')  # fn=7  没有负样本，不能运行
 # data = pd.read_csv('data/drug_cell/drug/AZD0530_train_data.csv')  # fn=11 0.8308
 # data = pd.read_csv('data/drug_cell/drug/LBW242_train_data.csv')  # fn=6 0.8000
-# data = pd.read_csv('data/drug_cell/drug/Nutlin-3_train_data.csv')  # fn=9
+# data = pd.read_csv('data/drug_cell/drug/Nutlin-3_train_data.csv')  # fn=9 0.7763
 # data = pd.read_csv('data/drug_cell/drug/Panobinostat_train_data.csv')  # fn=14 0.9825, 50%测试集 0.9789
-# data = pd.read_csv('data/drug_cell/drug/PD-0332991_train_data.csv')  # fn=8
+# data = pd.read_csv('data/drug_cell/drug/PD-0332991_train_data.csv')  # fn=8 0.9036
 # data = pd.read_csv('data/drug_cell/drug/PF2341066_train_data.csv')  # fn=10
 # data = pd.read_csv('data/drug_cell/drug/RAF265_train_data.csv')  # fn=10
 # data = pd.read_csv('data/drug_cell/drug/TAE684_train_data.csv')  # fn=8
