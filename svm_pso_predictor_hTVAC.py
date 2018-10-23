@@ -137,8 +137,6 @@ class PSO_HTVAC():
             self.c1 = (self.c1f - self.c1i) * iter / self.max_iter + self.c1i
             self.c2 = (self.c2f - self.c2i) * iter / self.max_iter + self.c2i
 
-            # 更新惯性权重
-            self.w = self.wS - (self.wS - self.wE) * iter / self.max_iter
         return fitness
 
         # ----------------------程序执行-----------------------

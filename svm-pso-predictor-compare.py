@@ -24,7 +24,7 @@ x_train, x_test, y_train, y_test = train_test_split(X, y, random_state=1, train_
 
 MAX_ITER = 1000
 
-for run in range(5000):
+for run in range(50):
     # ----------------------程序执行-----------------------
     start = time.time()
 
