@@ -19,12 +19,12 @@ import time
 # data = pd.read_csv('data/drug_cell/drug/Nutlin-3_train_data.csv')  # fn=9 0.7763
 # data = pd.read_csv('data/drug_cell/drug/Panobinostat_train_data.csv')  # fn=14 0.9825, 50%测试集 0.9789
 # data = pd.read_csv('data/drug_cell/drug/PD-0332991_train_data.csv')  # fn=8 0.9036
-# data = pd.read_csv('data/drug_cell/drug/PF2341066_train_data.csv')  # fn=10
-# data = pd.read_csv('data/drug_cell/drug/RAF265_train_data.csv')  # fn=10
-# data = pd.read_csv('data/drug_cell/drug/TAE684_train_data.csv')  # fn=8
-# data = pd.read_csv('data/drug_cell/drug/TKI258_train_data.csv')  # fn=13
-# data = pd.read_csv('data/drug_cell/drug/Topotecan_train_data.csv')  # fn=10
-data = pd.read_csv('data/drug_cell/drug/ZD-6474_train_data.csv')  # fn=8
+# data = pd.read_csv('data/drug_cell/drug/PF2341066_train_data.csv')  # fn=10 0.9000
+# data = pd.read_csv('data/drug_cell/drug/RAF265_train_data.csv')  # fn=10 0.8837->0.8953
+# data = pd.read_csv('data/drug_cell/drug/TAE684_train_data.csv')  # fn=8 0.8205
+# data = pd.read_csv('data/drug_cell/drug/TKI258_train_data.csv')  # fn=13 0.9125,->0.9250
+# data = pd.read_csv('data/drug_cell/drug/Topotecan_train_data.csv')  # fn=10 0.9432->0.9545
+data = pd.read_csv('data/drug_cell/drug/ZD-6474_train_data.csv')  # fn=8 0.8375
 
 data = data.fillna(0)
 x = data.iloc[:, :-1]
