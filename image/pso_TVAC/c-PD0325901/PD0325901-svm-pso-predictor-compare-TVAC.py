@@ -17,11 +17,11 @@ from svm_pso_predictor_original import PSO
 from svm_pso_predictor_RANDIW import PSO_RW
 import time
 
-data = pd.read_csv('data/drug_cell/drug/AEW541_train_data-rfe.csv')
+
+data = pd.read_csv('../../../data/drug_cell/drug/PD-0325901_train_data-rfe.csv')
 X = data.iloc[:, :-1]
 y = data.iloc[:, -1]
-# random_state=1不变的话，每次得到的数据都是一样的，random_state=None，每次的数据不一样
-x_train, x_test, y_train, y_test = train_test_split(X, y, train_size=0.6)
+x_train, x_test, y_train, y_test = train_test_split(X, y, random_state=1, train_size=0.6)
 
 MAX_ITER = 1000
 
@@ -45,7 +45,7 @@ for run in range(20):
     fitness_TVAC = pso_TVAC.iterator()
 
     pso_mTVAC = PSO_MTVAC(max_iter=MAX_ITER, x_train=x_train, y_train=y_train, x_test=x_test,
-                          y_test=y_test)  # 维度代表变量的个数
+                        y_test=y_test)  # 维度代表变量的个数
     pso_mTVAC.init_Population()
     fitness_mTVAC = pso_mTVAC.iterator()
 
@@ -56,12 +56,12 @@ for run in range(20):
     # fitness_mTVACRW = pso_mTVACRW.iterator()
 
     pso_hTVAC = PSO_HTVAC(max_iter=MAX_ITER, x_train=x_train, y_train=y_train, x_test=x_test,
-                          y_test=y_test)  # 维度代表变量的个数
+                        y_test=y_test)  # 维度代表变量的个数
     pso_hTVAC.init_Population()
     fitness_hTVAC = pso_hTVAC.iterator()
 
     pso_mhTVAC = PSO_MHTVAC(max_iter=MAX_ITER, x_train=x_train, y_train=y_train, x_test=x_test,
-                            y_test=y_test)  # 维度代表变量的个数
+                        y_test=y_test)  # 维度代表变量的个数
     pso_mhTVAC.init_Population()
     fitness_mhTVAC = pso_mhTVAC.iterator()
 
@@ -76,20 +76,9 @@ for run in range(20):
     # fitness_RW = pso_RW.iterator()
 
     end = time.time()
-
-    best = pso_TVAC  # 找到准确率最高的---越小越高
-    if pso_mTVAC.fit < best.fit:
-        best = pso_mTVAC
-    if pso_hTVAC.fit < best.fit:
-        best = pso_hTVAC
-    if pso_mhTVAC.fit < best.fit:
-        best = pso_mhTVAC
-    if pso_original.fit < best.fit:
-        best = pso_original
     # -------------------画图--------------------
     plt.figure(figsize=(10, 8))
-    plt.title('PSO comparison, cost: %.2f seconds\n best:%.4f  C=%.4f,gamma=%.4f' % (
-    end - start, -best.fit, best.gbest[0], best.gbest[1]), size=16)
+    plt.title('PSO comparison, cost: %.2f seconds' % (end-start), size=16)
     plt.xlabel("number of generations", size=16)
     plt.ylabel("SVM model accuracy rate", size=16)
     t = np.array([t for t in range(0, MAX_ITER)])
@@ -126,6 +115,6 @@ for run in range(20):
     plt.xticks(fontsize='14')
     # plt.rcParams['savefig.dpi'] = 300  # 图片像素
     # plt.rcParams['figure.dpi'] = 300  # 分辨率
-    plt.savefig('image/pso_TVAC/AEW541/new-pso-compare-AEW541-%d.png' % (1 + run))
+    plt.savefig('pso-compare-PD0325901-%d.png' % (5+run))
     # plt.show()
     plt.cla()
