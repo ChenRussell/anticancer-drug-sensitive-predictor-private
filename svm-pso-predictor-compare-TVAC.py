@@ -17,15 +17,18 @@ from svm_pso_predictor_original import PSO
 from svm_pso_predictor_RANDIW import PSO_RW
 import time
 
-data = pd.read_csv('data/drug_cell/drug/AEW541_train_data-rfe.csv')
+drug = 'AEW541'
+data = pd.read_csv('data/drug_cell/drug/%s_train_data-rfe-sa-50.csv' % drug)
 X = data.iloc[:, :-1]
 y = data.iloc[:, -1]
 # random_state=1不变的话，每次得到的数据都是一样的，random_state=None，每次的数据不一样
-x_train, x_test, y_train, y_test = train_test_split(X, y, train_size=0.6)
+train_size = 0.6
+x_train, x_test, y_train, y_test = train_test_split(X, y, random_state=1, train_size=train_size)
 
 MAX_ITER = 1000
+feature_number = X.shape[1]
 
-for run in range(20):
+for run in range(5):
     # ----------------------程序执行-----------------------
     start = time.time()
 
@@ -88,8 +91,8 @@ for run in range(20):
         best = pso_original
     # -------------------画图--------------------
     plt.figure(figsize=(10, 8))
-    plt.title('PSO comparison, cost: %.2f seconds\n best:%.4f  C=%.4f,gamma=%.4f' % (
-    end - start, -best.fit, best.gbest[0], best.gbest[1]), size=16)
+    plt.title('drug:%s\n feature number=%d,train_size:%.1f,cost: %d seconds\n best:%.4f  C=%.4f,gamma=%.5f' % (
+        drug, feature_number, train_size, end - start, -best.fit, best.gbest[0], best.gbest[1]), size=16)
     plt.xlabel("number of generations", size=16)
     plt.ylabel("SVM model accuracy rate", size=16)
     t = np.array([t for t in range(0, MAX_ITER)])
@@ -126,6 +129,6 @@ for run in range(20):
     plt.xticks(fontsize='14')
     # plt.rcParams['savefig.dpi'] = 300  # 图片像素
     # plt.rcParams['figure.dpi'] = 300  # 分辨率
-    plt.savefig('image/pso_TVAC/AEW541/new-pso-compare-AEW541-%d.png' % (1 + run))
+    plt.savefig('image/pso_TVAC/%s/sa-%d-pso-compare-%s-%d.png' % (drug, feature_number, drug, 1 + run))
     # plt.show()
     plt.cla()

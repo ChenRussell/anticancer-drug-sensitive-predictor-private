@@ -161,6 +161,7 @@ class RFE_V2(BaseEstimator, MetaEstimatorMixin, SelectorMixin):
         # Elimination
         iter = 0
         while np.sum(support_) > n_features_to_select:
+            print("迭代次数：", iter, '剩余特征数：', np.sum(support_))
             iter += 1
             # Remaining features, features为特征的索引列表
             features = np.arange(n_features)[support_]
@@ -196,6 +197,7 @@ class RFE_V2(BaseEstimator, MetaEstimatorMixin, SelectorMixin):
 
             # Eliminate the worse features, ----得到要移除的特征个数
             step = 1/(iter+1) * np.sum(support_)    # 模拟退火的思想，每次去除1/(iter+1)个特征
+            step = max(step, 1)
             threshold = int(min(step, np.sum(support_) - n_features_to_select))
 
             # Compute step score on the previous selection iteration
