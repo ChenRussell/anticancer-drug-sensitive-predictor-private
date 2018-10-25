@@ -8,6 +8,7 @@
 
 import numpy as np
 from sklearn.feature_selection.base import SelectorMixin
+from sklearn.feature_selection import mutual_info_
 from sklearn.base import BaseEstimator
 from sklearn.base import MetaEstimatorMixin
 from sklearn.base import clone
@@ -31,7 +32,7 @@ def _rfe_single_fit(rfe, estimator, X, y, train, test, scorer):
         _score(estimator, X_test[:, features], y_test, scorer)).scores_
 
 
-class RFE_V2(BaseEstimator, MetaEstimatorMixin, SelectorMixin):
+class SA_RFE_mRMR(BaseEstimator, MetaEstimatorMixin, SelectorMixin):
     """Feature ranking with recursive feature elimination.
 
     Given an external estimator that assigns weights to features (e.g., the
@@ -162,7 +163,7 @@ class RFE_V2(BaseEstimator, MetaEstimatorMixin, SelectorMixin):
         iter = 0
         while np.sum(support_) > n_features_to_select:
             iter += 1
-            # Remaining features, features为特征的索引列表
+            # Remaining features, features为剩余特征的索引列表
             features = np.arange(n_features)[support_]
 
             # Rank the remaining features
@@ -183,11 +184,37 @@ class RFE_V2(BaseEstimator, MetaEstimatorMixin, SelectorMixin):
                                    'attributes')
 
             # ----------------------代码修改处-----------------------
+            rfe_rank = safe_sqr(coefs).sum(axis=0)  # rfe算法得到的特征打分
+            mrmr_rank = []  # mrmr算法得到的特征打分
+            combine_rank = []  # 两种算法结合的特征打分
+            beta = 0.5
+
+            D = []
+            R = []
+            for fea in features:
+                D.append(mutual_info_._compute_mi(X[:, fea], y, True, True))    # 后两个参数是不是传True????
+            # D = D / len(features)
+
+            for fea_i in features:
+                R_sum = 0
+                for fea_j in features:
+                    if fea_j == fea_i:
+                        continue
+                    R_sum += mutual_info_._compute_mi(X[:, fea_i], X[:, fea_j], True, True)
+                R.append(R_sum / len(features))
+
+            for i in range(len(D)):
+                mrmr_rank.append(D[i] / R[i])
+
+            combine_rank = 0.6 * rfe_rank + 0.4 * np.asarray(mrmr_rank)
+
+            combine_ranks = np.argsort(combine_rank)
+            rfe_ranks = np.argsort(rfe_rank)
 
             # Get ranks, 求权值平方w^2， -----ranks存储的元素的索引位置的排序
             # [[0.4, -0.3,...,0.4]]
             if coefs.ndim > 1:
-                ranks = np.argsort(safe_sqr(coefs).sum(axis=0))
+                ranks = np.argsort(combine_rank)
             else:
                 ranks = np.argsort(safe_sqr(coefs))
 
@@ -195,7 +222,7 @@ class RFE_V2(BaseEstimator, MetaEstimatorMixin, SelectorMixin):
             ranks = np.ravel(ranks)
 
             # Eliminate the worse features, ----得到要移除的特征个数
-            step = 1/(iter+1) * np.sum(support_)    # 模拟退火的思想，每次去除1/(iter+1)个特征
+            step = 1 / (iter + 1) * np.sum(support_)  # 模拟退火的思想，每次去除1/(iter+1)个特征
             threshold = int(min(step, np.sum(support_) - n_features_to_select))
 
             # Compute step score on the previous selection iteration
@@ -268,7 +295,7 @@ class RFE_V2(BaseEstimator, MetaEstimatorMixin, SelectorMixin):
         return self.estimator_.predict_log_proba(self.transform(X))
 
 
-class RFECV(RFE_V2, MetaEstimatorMixin):
+class RFECV(SA_RFE_mRMR, MetaEstimatorMixin):
     """Feature ranking with recursive feature elimination and cross-validated
     selection of the best number of features.
 
@@ -413,9 +440,9 @@ class RFECV(RFE_V2, MetaEstimatorMixin):
         if step <= 0:
             raise ValueError("Step must be >0")
 
-        rfe = RFE_V2(estimator=self.estimator,
-                     n_features_to_select=n_features_to_select,
-                     step=self.step, verbose=self.verbose)
+        rfe = SA_RFE_mRMR(estimator=self.estimator,
+                          n_features_to_select=n_features_to_select,
+                          step=self.step, verbose=self.verbose)
 
         # Determine the number of subsets of features by fitting across
         # the train folds and choosing the "features_to_select" parameter
@@ -444,8 +471,8 @@ class RFECV(RFE_V2, MetaEstimatorMixin):
             n_features_to_select)
 
         # Re-execute an elimination with best_k over the whole set
-        rfe = RFE_V2(estimator=self.estimator,
-                     n_features_to_select=n_features_to_select, step=self.step)
+        rfe = SA_RFE_mRMR(estimator=self.estimator,
+                          n_features_to_select=n_features_to_select, step=self.step)
 
         rfe.fit(X, y)
 
