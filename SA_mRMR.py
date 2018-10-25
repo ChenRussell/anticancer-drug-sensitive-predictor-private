@@ -32,7 +32,7 @@ def _rfe_single_fit(rfe, estimator, X, y, train, test, scorer):
         _score(estimator, X_test[:, features], y_test, scorer)).scores_
 
 
-class SA_RFE_mRMR(BaseEstimator, MetaEstimatorMixin, SelectorMixin):
+class SA_mRMR(BaseEstimator, MetaEstimatorMixin, SelectorMixin):
     """Feature ranking with recursive feature elimination.
 
     Given an external estimator that assigns weights to features (e.g., the
@@ -167,24 +167,24 @@ class SA_RFE_mRMR(BaseEstimator, MetaEstimatorMixin, SelectorMixin):
             features = np.arange(n_features)[support_]
 
             # Rank the remaining features
-            estimator = clone(self.estimator)
+            # estimator = clone(self.estimator)
             if self.verbose > 0:
                 print("Fitting estimator with %d features." % np.sum(support_))
 
-            estimator.fit(X[:, features], y)  # 每次循环都重新训练一次
+            # estimator.fit(X[:, features], y)  # 每次循环都重新训练一次
 
             # Get coefs 此处得到就是SVM中的权重w
-            if hasattr(estimator, 'coef_'):
-                coefs = estimator.coef_
-            else:
-                coefs = getattr(estimator, 'feature_importances_', None)
-            if coefs is None:
-                raise RuntimeError('The classifier does not expose '
-                                   '"coef_" or "feature_importances_" '
-                                   'attributes')
+            # if hasattr(estimator, 'coef_'):
+            #     coefs = estimator.coef_
+            # else:
+            #     coefs = getattr(estimator, 'feature_importances_', None)
+            # if coefs is None:
+            #     raise RuntimeError('The classifier does not expose '
+            #                        '"coef_" or "feature_importances_" '
+            #                        'attributes')
 
             # ----------------------代码修改处-----------------------
-            rfe_rank = safe_sqr(coefs).sum(axis=0)  # rfe算法得到的特征打分
+            # rfe_rank = safe_sqr(coefs).sum(axis=0)  # rfe算法得到的特征打分
             mrmr_rank = []  # mrmr算法得到的特征打分
             combine_rank = []  # 两种算法结合的特征打分
             beta = 0.5
@@ -206,37 +206,39 @@ class SA_RFE_mRMR(BaseEstimator, MetaEstimatorMixin, SelectorMixin):
             for i in range(len(D)):
                 mrmr_rank.append(D[i] / R[i])
 
-            combine_rank = 0.6 * rfe_rank + 0.4 * np.asarray(mrmr_rank)
+            mrmr_rank = np.asarray(mrmr_rank)
+            # combine_rank = 0.6 * rfe_rank + 0.4 * mrmr_rank
 
             combine_ranks = np.argsort(combine_rank)
-            rfe_ranks = np.argsort(rfe_rank)
+            # rfe_ranks = np.argsort(rfe_rank)
 
             # Get ranks, 求权值平方w^2， -----ranks存储的元素的索引位置的排序
             # [[0.4, -0.3,...,0.4]]
-            if coefs.ndim > 1:
-                ranks = np.argsort(combine_rank)
-            else:
-                ranks = np.argsort(safe_sqr(coefs))
+            # if coefs.ndim > 1:
+            ranks = np.argsort(mrmr_rank)
+            # else:
+            #     ranks = np.argsort(safe_sqr(coefs))
 
             # for sparse case ranks is matrix
             ranks = np.ravel(ranks)
 
             # Eliminate the worse features, ----得到要移除的特征个数
             step = 1 / (iter + 1) * np.sum(support_)  # 模拟退火的思想，每次去除1/(iter+1)个特征
+            step = max(step, 1)  # 防止step小于1时，下面的式子中强转后为0
             threshold = int(min(step, np.sum(support_) - n_features_to_select))
 
             # Compute step score on the previous selection iteration
             # because 'estimator' must use features
             # that have not been eliminated yet
-            if step_score:
-                self.scores_.append(step_score(estimator, features))
+            # if step_score:
+            #     self.scores_.append(step_score(estimator, features))
             support_[features[ranks][:threshold]] = False
             ranking_[np.logical_not(support_)] += 1  # False对应的特征加一
 
         # Set final attributes
         features = np.arange(n_features)[support_]
-        self.estimator_ = clone(self.estimator)
-        self.estimator_.fit(X[:, features], y)
+        # self.estimator_ = clone(self.estimator)
+        # self.estimator_.fit(X[:, features], y)
 
         # Compute step score when only n_features_to_select features left
         if step_score:
@@ -295,7 +297,7 @@ class SA_RFE_mRMR(BaseEstimator, MetaEstimatorMixin, SelectorMixin):
         return self.estimator_.predict_log_proba(self.transform(X))
 
 
-class RFECV(SA_RFE_mRMR, MetaEstimatorMixin):
+class RFECV(SA_mRMR, MetaEstimatorMixin):
     """Feature ranking with recursive feature elimination and cross-validated
     selection of the best number of features.
 
@@ -440,9 +442,9 @@ class RFECV(SA_RFE_mRMR, MetaEstimatorMixin):
         if step <= 0:
             raise ValueError("Step must be >0")
 
-        rfe = SA_RFE_mRMR(estimator=self.estimator,
-                          n_features_to_select=n_features_to_select,
-                          step=self.step, verbose=self.verbose)
+        rfe = SA_mRMR(estimator=self.estimator,
+                      n_features_to_select=n_features_to_select,
+                      step=self.step, verbose=self.verbose)
 
         # Determine the number of subsets of features by fitting across
         # the train folds and choosing the "features_to_select" parameter
@@ -471,8 +473,8 @@ class RFECV(SA_RFE_mRMR, MetaEstimatorMixin):
             n_features_to_select)
 
         # Re-execute an elimination with best_k over the whole set
-        rfe = SA_RFE_mRMR(estimator=self.estimator,
-                          n_features_to_select=n_features_to_select, step=self.step)
+        rfe = SA_mRMR(estimator=self.estimator,
+                      n_features_to_select=n_features_to_select, step=self.step)
 
         rfe.fit(X, y)
 
