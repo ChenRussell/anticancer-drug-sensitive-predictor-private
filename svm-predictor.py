@@ -4,7 +4,7 @@ from sklearn import svm
 from sklearn.metrics import roc_curve, auc  ###计算roc和auc
 import matplotlib.pyplot as plt
 
-data = pd.read_csv('data/drug_cell/drug/17-AAG_train_data-rfe-sa-30.csv')
+data = pd.read_csv('data/drug_cell/drug/17-AAG/17-AAG_train_data-rfe-sa-60.csv')
 X = data.iloc[:, :-1]
 y = data.iloc[:, -1]
 # X = X.as_matrix()
@@ -15,14 +15,15 @@ from sklearn.model_selection import train_test_split
 
 # x为数据集的feature熟悉，y为label.
 # x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
-x_train, x_test, y_train, y_test = train_test_split(X, y, train_size=0.7)
+x_train, x_test, y_train, y_test = train_test_split(X, y, train_size=0.5)
 
 print(x_train)
 print(y_train)
 # print(X, len(X))
 # print(y, len(y))
 #
-model = svm.SVC(C=502.5649, gamma=0.00019)  # gamma缺省值为 1.0/x.shape[1]
+# model = svm.SVC(C=502.5649, gamma=0.00019)  # gamma缺省值为 1.0/x.shape[1]
+model = svm.SVC(C=383.7267, gamma=0.00001)  # gamma缺省值为 1.0/x.shape[1]
 # model = svm.SVC(C=0.1)
 model.fit(x_train, y_train)
 y_score = model.decision_function(x_test)

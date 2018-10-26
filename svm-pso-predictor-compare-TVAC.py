@@ -17,8 +17,10 @@ from svm_pso_predictor_original import PSO
 from svm_pso_predictor_RANDIW import PSO_RW
 import time
 
-drug = 'AEW541'
-data = pd.read_csv('data/drug_cell/drug/%s_train_data-rfe-sa-50.csv' % drug)
+drug = 'AZD0530'
+fn = 60
+data = pd.read_csv('data/drug_cell/drug/%s/%s_train_data-rfe-sa-%d.csv' % (drug, drug, fn))
+# data = pd.read_csv('data/drug_cell/drug/%s/%s_train_data-rfe-mrmr-sa-%d.csv' % (drug, drug, fn))
 X = data.iloc[:, :-1]
 y = data.iloc[:, -1]
 # random_state=1不变的话，每次得到的数据都是一样的，random_state=None，每次的数据不一样
@@ -129,6 +131,10 @@ for run in range(5):
     plt.xticks(fontsize='14')
     # plt.rcParams['savefig.dpi'] = 300  # 图片像素
     # plt.rcParams['figure.dpi'] = 300  # 分辨率
-    plt.savefig('image/pso_TVAC/%s/sa-%d-pso-compare-%s-%d.png' % (drug, feature_number, drug, 1 + run))
+    plt.savefig(
+        'image/pso_TVAC/%s/fn%d/sa-%d-pso-compare-%s-%d.png' % (drug, feature_number, feature_number, drug, 1 + run))
+    # plt.show()
+    # plt.savefig(
+    #     'image/pso_TVAC/%s/fn%d/sa-mrmr-%d-pso-compare-%s-%d.png' % (drug, feature_number, feature_number, drug, 1 + run))
     # plt.show()
     plt.cla()

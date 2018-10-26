@@ -19,6 +19,7 @@ from sklearn.model_selection._validation import _safe_split, _score
 from sklearn.metrics.scorer import check_scoring
 from sklearn.utils import check_X_y, safe_sqr
 from sklearn.utils.metaestimators import if_delegate_has_method
+import time
 
 
 def _rfe_single_fit(rfe, estimator, X, y, train, test, scorer):
@@ -187,27 +188,35 @@ class SA_RFE_mRMR(BaseEstimator, MetaEstimatorMixin, SelectorMixin):
             # ----------------------代码修改处-----------------------
             rfe_rank = safe_sqr(coefs).sum(axis=0)  # rfe算法得到的特征打分
             mrmr_rank = []  # mrmr算法得到的特征打分
-            combine_rank = []  # 两种算法结合的特征打分
-            beta = 0.5
+            combine_rank = rfe_rank  # 两种算法结合的特征打分
+            beta = 0.6
 
-            D = []
-            R = []
-            for fea in features:
-                D.append(mutual_info_._compute_mi(X[:, fea], y, True, True))    # 后两个参数是不是传True????
-            # D = D / len(features)
+            if np.sum(support_) < 100:
+                D = []
+                R = []
+                for fea in features:
+                    D.append(mutual_info_._compute_mi(X[:, fea], y, True, True))  # 后两个参数是不是传True????
+                # D = D / len(features)
 
-            for fea_i in features:
-                R_sum = 0
-                for fea_j in features:
-                    if fea_j == fea_i:
-                        continue
-                    R_sum += mutual_info_._compute_mi(X[:, fea_i], X[:, fea_j], True, True)
-                R.append(R_sum / len(features))
+                mrmr_start = time.time()
+                for idx, fea_i in enumerate(features):
+                    print('第%d次循环开始...' % idx)
+                    start = time.time()
+                    R_sum = 0
+                    for fea_j in features:
+                        if fea_j == fea_i:
+                            continue
+                        R_sum += mutual_info_._compute_mi(X[:, fea_i], X[:, fea_j], True, True)
+                    end = time.time()
+                    print('第%d次循环结束...' % idx, '耗费%d seconds...' % (end - start))
+                    R.append(R_sum / len(features))
+                mrmr_end = time.time()
+                print('此次mrmr耗时%d:' % (mrmr_end-mrmr_start))
 
-            for i in range(len(D)):
-                mrmr_rank.append(D[i] / R[i])
+                for i in range(len(D)):
+                    mrmr_rank.append(D[i] / R[i])
 
-            combine_rank = 0.6 * rfe_rank + 0.4 * np.asarray(mrmr_rank)
+                combine_rank = beta * combine_rank + (1 - beta) * np.asarray(mrmr_rank)
 
             combine_ranks = np.argsort(combine_rank)
             rfe_ranks = np.argsort(rfe_rank)
