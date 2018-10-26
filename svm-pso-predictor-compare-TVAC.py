@@ -23,7 +23,7 @@ X = data.iloc[:, :-1]
 y = data.iloc[:, -1]
 # random_state=1不变的话，每次得到的数据都是一样的，random_state=None，每次的数据不一样
 train_size = 0.6
-x_train, x_test, y_train, y_test = train_test_split(X, y, random_state=1, train_size=train_size)
+# x_train, x_test, y_train, y_test = train_test_split(X, y, random_state=1, train_size=train_size)
 
 MAX_ITER = 1000
 feature_number = X.shape[1]
@@ -42,13 +42,11 @@ for run in range(5):
     # pso_W.init_Population()
     # fitness_W = pso_W.iterator()
 
-    pso_TVAC = PSO_TVAC(max_iter=MAX_ITER, x_train=x_train, y_train=y_train, x_test=x_test,
-                        y_test=y_test)  # 维度代表变量的个数
+    pso_TVAC = PSO_TVAC(max_iter=MAX_ITER, data_X=X, data_y=y)  # 维度代表变量的个数
     pso_TVAC.init_Population()
     fitness_TVAC = pso_TVAC.iterator()
 
-    pso_mTVAC = PSO_MTVAC(max_iter=MAX_ITER, x_train=x_train, y_train=y_train, x_test=x_test,
-                          y_test=y_test)  # 维度代表变量的个数
+    pso_mTVAC = PSO_MTVAC(max_iter=MAX_ITER, data_X=X, data_y=y)  # 维度代表变量的个数
     pso_mTVAC.init_Population()
     fitness_mTVAC = pso_mTVAC.iterator()
 
@@ -58,18 +56,15 @@ for run in range(5):
     # pso_mTVACRW.init_Population()
     # fitness_mTVACRW = pso_mTVACRW.iterator()
 
-    pso_hTVAC = PSO_HTVAC(max_iter=MAX_ITER, x_train=x_train, y_train=y_train, x_test=x_test,
-                          y_test=y_test)  # 维度代表变量的个数
+    pso_hTVAC = PSO_HTVAC(max_iter=MAX_ITER, data_X=X, data_y=y)  # 维度代表变量的个数
     pso_hTVAC.init_Population()
     fitness_hTVAC = pso_hTVAC.iterator()
 
-    pso_mhTVAC = PSO_MHTVAC(max_iter=MAX_ITER, x_train=x_train, y_train=y_train, x_test=x_test,
-                            y_test=y_test)  # 维度代表变量的个数
+    pso_mhTVAC = PSO_MHTVAC(max_iter=MAX_ITER, data_X=X, data_y=y)  # 维度代表变量的个数
     pso_mhTVAC.init_Population()
     fitness_mhTVAC = pso_mhTVAC.iterator()
 
-    pso_original = PSO(max_iter=MAX_ITER, x_train=x_train, y_train=y_train, x_test=x_test,
-                       y_test=y_test)  # 维度代表变量的个数
+    pso_original = PSO(max_iter=MAX_ITER, data_X=X, data_y=y)  # 维度代表变量的个数
     pso_original.init_Population()
     fitness_original = pso_original.iterator()
 

@@ -6,30 +6,34 @@ import pandas as pd
 from sklearn import svm
 from sklearn.model_selection import train_test_split
 import cmath
+from sklearn.model_selection import cross_val_score
+from sklearn.model_selection import ShuffleSplit
 
-# data = pd.read_csv('data/drug_cell/drug/Paclitaxel_train_data-rfe.csv')
-# X = data.iloc[:, :-1]
-# y = data.iloc[:, -1]
+data = pd.read_csv('data/drug_cell/drug/Paclitaxel/Paclitaxel_train_data-rfe.csv')
+data_X = data.iloc[:, :-1]
+data_y = data.iloc[:, -1]
 # x_train, x_test, y_train, y_test = train_test_split(X, y, random_state=1, train_size=0.7)
 
 MAX_ITER = 500
 
-data = pd.read_csv('data/drug_cell/drug/Sorafenib_train_data-rfe.csv')
-data_test = pd.read_csv('data/CGP/drug_cell/common_drugs/Sorafenib_train_data.csv')
-x_train = data.iloc[:, :-1]
-y_train = data.iloc[:, -1]
-
-x_test = data_test.iloc[:, :-1]
-y_test = data_test.iloc[:, -1]
+# data = pd.read_csv('data/drug_cell/drug/Sorafenib_train_data-rfe.csv')
+# data_test = pd.read_csv('data/CGP/drug_cell/common_drugs/Sorafenib_train_data.csv')
+# x_train = data.iloc[:, :-1]
+# y_train = data.iloc[:, -1]
+#
+# x_test = data_test.iloc[:, :-1]
+# y_test = data_test.iloc[:, -1]
 
 
 # ----------------------PSO参数设置---------------------------------
 class PSO_MTVAC():
     def __init__(self, max_iter, pN=30, dim=2):
-        self.x_train = x_train
-        self.y_train = y_train
-        self.x_test = x_test
-        self.y_test = y_test
+        # self.x_train = x_train
+        # self.y_train = y_train
+        # self.x_test = x_test
+        # self.y_test = y_test
+        self.data_X = data_X
+        self.data_y = data_y
 
         self.w = 0.9  # 惯性权重
         self.wS = 0.9
@@ -75,9 +79,13 @@ class PSO_MTVAC():
         if g <= 0 or c <= 0:
             return 1e10
         model = svm.SVC(C=c, gamma=g)  # gamma缺省值为 1.0/x.shape[1]
-        model.fit(self.x_train, self.y_train)
-        y_score = model.score(self.x_test, self.y_test)
-        return -y_score
+        # model.fit(self.x_train, self.y_train)
+        # y_score = model.score(self.x_test, self.y_test)
+        # return -y_score
+        cv = ShuffleSplit(n_splits=5, test_size=.4, random_state=0)
+        score = cross_val_score(model, self.data_X, self.data_y, cv=cv)
+        print(score)
+        return -score.mean()
 
     # ---------------------初始化种群----------------------------------
     def init_Population(self):
