@@ -59,7 +59,7 @@ class PSO():
         # model.fit(self.x_train, self.y_train)
         # y_score = model.score(self.x_test, self.y_test)
         # return -y_score
-        cv = ShuffleSplit(n_splits=5, test_size=.4, random_state=0)
+        cv = ShuffleSplit(n_splits=3, test_size=.4, random_state=0)
         score = cross_val_score(model, self.data_X, self.data_y, cv=cv)
         print(score)
         return -score.mean()

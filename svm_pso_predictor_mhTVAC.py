@@ -83,7 +83,7 @@ class PSO_MHTVAC():
         model = svm.SVC(C=c, gamma=g)  # gamma缺省值为 1.0/x.shape[1]
         # model.fit(self.x_train, self.y_train)
         # y_score = model.score(self.x_test, self.y_test)
-        cv = ShuffleSplit(n_splits=5, test_size=.4, random_state=0)
+        cv = ShuffleSplit(n_splits=3, test_size=.4, random_state=0)
         score = cross_val_score(model, self.data_X, self.data_y, cv=cv)
         print(score)
         return -score.mean()

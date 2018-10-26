@@ -27,7 +27,7 @@ y = data.iloc[:, -1]
 train_size = 0.6
 # x_train, x_test, y_train, y_test = train_test_split(X, y, random_state=1, train_size=train_size)
 
-MAX_ITER = 1000
+MAX_ITER = 800
 feature_number = X.shape[1]
 
 for run in range(5):
@@ -44,9 +44,9 @@ for run in range(5):
     # pso_W.init_Population()
     # fitness_W = pso_W.iterator()
 
-    pso_TVAC = PSO_TVAC(max_iter=MAX_ITER, data_X=X, data_y=y)  # 维度代表变量的个数
-    pso_TVAC.init_Population()
-    fitness_TVAC = pso_TVAC.iterator()
+    # pso_TVAC = PSO_TVAC(max_iter=MAX_ITER, data_X=X, data_y=y)  # 维度代表变量的个数
+    # pso_TVAC.init_Population()
+    # fitness_TVAC = pso_TVAC.iterator()
 
     pso_mTVAC = PSO_MTVAC(max_iter=MAX_ITER, data_X=X, data_y=y)  # 维度代表变量的个数
     pso_mTVAC.init_Population()
@@ -77,7 +77,7 @@ for run in range(5):
 
     end = time.time()
 
-    best = pso_TVAC  # 找到准确率最高的---越小越高
+    best = pso_mTVAC  # 找到准确率最高的---越小越高
     if pso_mTVAC.fit < best.fit:
         best = pso_mTVAC
     if pso_hTVAC.fit < best.fit:
@@ -98,7 +98,7 @@ for run in range(5):
 
     # fitness_W2 = [-v for v in fitness_W]  # 取反，得到正数，模型准确率
 
-    fitness_TVAC2 = [-v for v in fitness_TVAC]  # 取反，得到正数，模型准确率
+    # fitness_TVAC2 = [-v for v in fitness_TVAC]  # 取反，得到正数，模型准确率
 
     fitness_mTVAC2 = [-v for v in fitness_mTVAC]  # 取反，得到正数，模型准确率
 
@@ -115,10 +115,10 @@ for run in range(5):
     # plt.plot(t, fitness_K2, color='b', linewidth=3, label='PSO-K')
     plt.plot(t, pso_original2, color='b', linewidth=3.2, label='PSO', ls='-.')
     # plt.plot(t, fitness_W2, color='r', linewidth=3, label='PSO-TVIW', ls=':')
-    plt.plot(t, fitness_TVAC2, color='g', linewidth=3.1, label='PSO-TVAC', ls='--')
+    # plt.plot(t, fitness_TVAC2, color='g', linewidth=3.1, label='PSO-TVAC', ls='--')
     # plt.plot(t, fitness_RW2, color='lightblue', linewidth=3, label='PSO-RANDIW', ls='-')
     plt.plot(t, fitness_mTVAC2, color='orange', linewidth=3, label='PSO-mTVAC', ls=':')
-    plt.plot(t, fitness_mhTVAC2, color='red', linewidth=2.9, label='PSO-mhTVAC')
+    plt.plot(t, fitness_mhTVAC2, color='red', linewidth=2.9, label='PSO-mhTVAC', ls='--')
     # plt.plot(t, fitness_mTVACRW2, color='black', linewidth=3, label='PSO-mTVACRW')
     plt.plot(t, fitness_hTVAC2, color='yellow', linewidth=2.8, label='PSO-hTVAC')
     plt.legend(loc="lower right", fontsize=16)
@@ -127,7 +127,7 @@ for run in range(5):
     # plt.rcParams['savefig.dpi'] = 300  # 图片像素
     # plt.rcParams['figure.dpi'] = 300  # 分辨率
     plt.savefig(
-        'image/pso_TVAC/%s/fn%d/sa-%d-pso-compare-%s-%d.png' % (drug, feature_number, feature_number, drug, 1 + run))
+        'image/pso_TVAC/%s/fn%d/sa-%d-pso-cv-compare-%s-%d.png' % (drug, feature_number, feature_number, drug, 2 + run))
     # plt.show()
     # plt.savefig(
     #     'image/pso_TVAC/%s/fn%d/sa-mrmr-%d-pso-compare-%s-%d.png' % (drug, feature_number, feature_number, drug, 1 + run))
