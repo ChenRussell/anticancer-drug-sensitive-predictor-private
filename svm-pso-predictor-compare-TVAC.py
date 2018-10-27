@@ -17,11 +17,11 @@ from svm_pso_predictor_original import PSO
 from svm_pso_predictor_RANDIW import PSO_RW
 import time
 
-drug = 'PD-0332991'
-fn = 50
+drug = 'Erlotinib'
+fn = 10
 n_splits = 3
-data = pd.read_csv('data/drug_cell/drug/%s/%s_train_data-rfe-sa-%d.csv' % (drug, drug, fn))
-# data = pd.read_csv('data/drug_cell/drug/%s/%s_train_data-rfe-mrmr-sa-%d.csv' % (drug, drug, fn))
+# data = pd.read_csv('data/drug_cell/drug/%s/%s_train_data-rfe-sa-%d.csv' % (drug, drug, fn))
+data = pd.read_csv('data/drug_cell/drug/%s/%s_train_data-rfe-mrmr-sa-%d.csv' % (drug, drug, fn))
 X = data.iloc[:, :-1]
 y = data.iloc[:, -1]
 # random_state=1不变的话，每次得到的数据都是一样的，random_state=None，每次的数据不一样
@@ -119,7 +119,7 @@ for run in range(3):
     plt.plot(t, fitness_TVAC2, color='g', linewidth=3.1, label='PSO-TVAC', ls='--')
     # plt.plot(t, fitness_RW2, color='lightblue', linewidth=3, label='PSO-RANDIW', ls='-')
     plt.plot(t, fitness_mTVAC2, color='orange', linewidth=3, label='PSO-mTVAC', ls=':')
-    plt.plot(t, fitness_mhTVAC2, color='red', linewidth=2.9, label='PSO-mhTVAC', ls='--')
+    plt.plot(t, fitness_mhTVAC2, color='red', linewidth=2.9, label='PSO-mhTVAC', ls='-')
     # plt.plot(t, fitness_mTVACRW2, color='black', linewidth=3, label='PSO-mTVACRW')
     # plt.plot(t, fitness_hTVAC2, color='yellow', linewidth=2.8, label='PSO-hTVAC')
     plt.legend(loc="lower right", fontsize=16)
@@ -127,11 +127,12 @@ for run in range(3):
     plt.xticks(fontsize='14')
     # plt.rcParams['savefig.dpi'] = 300  # 图片像素
     # plt.rcParams['figure.dpi'] = 300  # 分辨率
-    plt.savefig(
-        'image/pso_TVAC/%s/fn%d/sa-%d-pso-cv-compare-%s-%d.png' % (
-            drug, feature_number, feature_number, drug, 4 + run))
-    # plt.show()
     # plt.savefig(
-    #     'image/pso_TVAC/c-%s/fn%d/sa-mrmr-%d-pso-compare-%s-%d.png' % (drug, feature_number, feature_number, drug, 1 + run))
+    #     'image/pso_TVAC/%s/fn%d/sa-%d-pso-cv-compare-%s-%d.png' % (
+    #         drug, feature_number, feature_number, drug, 4 + run))
+    # plt.show()
+    plt.savefig(
+        'image/pso_TVAC/c-%s/fn%d/sa-mrmr-%d-pso-cv-compare-%s-%d.png' % (
+            drug, feature_number, feature_number, drug, 1 + run))
     # plt.show()
     plt.cla()
