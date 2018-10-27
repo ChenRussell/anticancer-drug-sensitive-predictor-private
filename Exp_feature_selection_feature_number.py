@@ -21,14 +21,14 @@ y2 = data['AEW541']
 y3 = data['AZD0530']
 y4 = data['AZD6244']
 plt.subplot(411)
-plt.plot(x, y1, color='b', linewidth=3, label='17-AAG')  # , ls='-.', marker='o', ms=10)
+plt.plot(x, y1, color='b', linewidth=3, label='17-AAG' , ls='-.', marker='+', ms=10)
 plt.legend(fontsize=16)
 plt.yticks(fontsize=14)
 plt.xticks(fontsize=14)
 plt.grid(True)
 
 plt.subplot(412)
-plt.plot(x, y2, color='r', linewidth=3, label='AEW541')  # , ls=':', marker='^', ms=10)
+plt.plot(x, y2, color='r', linewidth=3, label='AEW541', ls=':', marker='^', ms=10)
 plt.legend(fontsize=16)
 plt.yticks(fontsize=14)
 plt.xticks(fontsize=14)
@@ -36,7 +36,7 @@ plt.grid(True)
 plt.ylabel('Accuracy    Rate', fontsize=16)
 
 plt.subplot(413)
-plt.plot(x, y3, color='g', linewidth=3, label='AZD0530')  # , ls='--', marker='>', ms=10)
+plt.plot(x, y3, color='g', linewidth=3, label='AZD0530', ls='-', marker='*', ms=10)
 plt.legend(fontsize=16)
 plt.yticks(fontsize=14)
 plt.xticks(fontsize=14)
@@ -44,7 +44,7 @@ plt.grid(True)
 plt.ylabel('SVM     Model', fontsize=16)
 
 plt.subplot(414)
-plt.plot(x, y4, color='orange', linewidth=3, label='AZD6244')  # , ls='-', marker='<', ms=10)
+plt.plot(x, y4, color='orange', linewidth=3, label='AZD6244', ls='--', marker='o', ms=10)
 
 # plt.subplot(221)
 plt.legend(fontsize=16)

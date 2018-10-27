@@ -5,8 +5,8 @@ from SA_mRMR import SA_mRMR
 import pandas as pd
 import time
 
-drug = 'AZD0530'
-feature_number = 100
+drug = 'Nutlin-3'
+feature_number = 50
 data = pd.read_csv('data/drug_cell/drug/%s/%s_train_data.csv' % (drug, drug))
 
 data = data.fillna(0)

@@ -17,8 +17,8 @@ from svm_pso_predictor_original import PSO
 from svm_pso_predictor_RANDIW import PSO_RW
 import time
 
-drug = 'AZD0530'
-fn = 60
+drug = 'Nutlin-3'
+fn = 50
 data = pd.read_csv('data/drug_cell/drug/%s/%s_train_data-rfe-sa-%d.csv' % (drug, drug, fn))
 # data = pd.read_csv('data/drug_cell/drug/%s/%s_train_data-rfe-mrmr-sa-%d.csv' % (drug, drug, fn))
 X = data.iloc[:, :-1]
@@ -30,7 +30,7 @@ train_size = 0.6
 MAX_ITER = 800
 feature_number = X.shape[1]
 
-for run in range(5):
+for run in range(3):
     # ----------------------程序执行-----------------------
     start = time.time()
 
@@ -117,7 +117,7 @@ for run in range(5):
     # plt.plot(t, fitness_W2, color='r', linewidth=3, label='PSO-TVIW', ls=':')
     # plt.plot(t, fitness_TVAC2, color='g', linewidth=3.1, label='PSO-TVAC', ls='--')
     # plt.plot(t, fitness_RW2, color='lightblue', linewidth=3, label='PSO-RANDIW', ls='-')
-    plt.plot(t, fitness_mTVAC2, color='orange', linewidth=3, label='PSO-mTVAC', ls=':')
+    plt.plot(t, fitness_mTVAC2, color='g', linewidth=3, label='PSO-mTVAC', ls=':')
     plt.plot(t, fitness_mhTVAC2, color='red', linewidth=2.9, label='PSO-mhTVAC', ls='--')
     # plt.plot(t, fitness_mTVACRW2, color='black', linewidth=3, label='PSO-mTVACRW')
     plt.plot(t, fitness_hTVAC2, color='yellow', linewidth=2.8, label='PSO-hTVAC')
