@@ -5,7 +5,7 @@ from SA_mRMR import SA_mRMR
 import pandas as pd
 import time
 
-drug = 'Nutlin-3'
+drug = 'Paclitaxel'
 feature_number = 50
 data = pd.read_csv('data/drug_cell/drug/%s/%s_train_data.csv' % (drug, drug))
 
