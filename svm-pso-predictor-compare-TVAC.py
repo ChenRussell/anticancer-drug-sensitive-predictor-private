@@ -17,9 +17,9 @@ from svm_pso_predictor_original import PSO
 from svm_pso_predictor_RANDIW import PSO_RW
 import time
 
-drug = 'Erlotinib'
-fn = 10
-n_splits = 3
+drug = 'Sorafenib'
+fn = 20
+n_splits = 3    # 将数据随机切分成三份，每份数据训练集60%，测试集40%，模型准确率为三份数据对应的平均
 # data = pd.read_csv('data/drug_cell/drug/%s/%s_train_data-rfe-sa-%d.csv' % (drug, drug, fn))
 data = pd.read_csv('data/drug_cell/drug/%s/%s_train_data-rfe-mrmr-sa-%d.csv' % (drug, drug, fn))
 X = data.iloc[:, :-1]
@@ -128,8 +128,8 @@ for run in range(3):
     # plt.rcParams['savefig.dpi'] = 300  # 图片像素
     # plt.rcParams['figure.dpi'] = 300  # 分辨率
     # plt.savefig(
-    #     'image/pso_TVAC/%s/fn%d/sa-%d-pso-cv-compare-%s-%d.png' % (
-    #         drug, feature_number, feature_number, drug, 4 + run))
+    #     'image/pso_TVAC/c-%s/fn%d/sa-%d-pso-cv-compare-%s-%d.png' % (
+    #         drug, feature_number, feature_number, drug, 1 + run))
     # plt.show()
     plt.savefig(
         'image/pso_TVAC/c-%s/fn%d/sa-mrmr-%d-pso-cv-compare-%s-%d.png' % (

@@ -6,7 +6,7 @@ import pandas as pd
 import time
 
 drug = 'Erlotinib'
-feature_number = 10
+feature_number = 20
 data = pd.read_csv('data/drug_cell/drug/%s/%s_train_data.csv' % (drug, drug))
 
 data = data.fillna(0)

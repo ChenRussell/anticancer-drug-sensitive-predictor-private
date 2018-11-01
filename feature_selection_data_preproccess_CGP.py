@@ -22,14 +22,18 @@ print(data_unstack.head(5))
 #         'ENSG00000171004','ENSG00000128512']
 
 # Sorafenib
-cols = ['ENSG00000131149', 'ENSG00000104093', 'ENSG00000135069', 'ENSG00000110002', 'ENSG00000196387',
-        'ENSG00000102445', 'ENSG00000169583', 'ENSG00000102362', 'ENSG00000198846']
+# cols = ['ENSG00000131149', 'ENSG00000104093', 'ENSG00000135069', 'ENSG00000110002', 'ENSG00000196387',
+#         'ENSG00000102445', 'ENSG00000169583', 'ENSG00000102362', 'ENSG00000198846']
+
+# PHA-665752
+cols = ['ENSG00000175183', 'ENSG00000170323', 'ENSG00000086205', 'ENSG00000154589', 'ENSG00000163083',
+        'ENSG00000100852', 'ENSG00000167191', 'ENSG00000082497', 'ENSG00000105497', 'ENSG00000116014']
 data_unstack = data_unstack[cols]
 
 print(data_unstack.head(5))
 print(data_unstack.shape)
 
-drug_info = pd.read_csv('data/CGP/drug_cell/drug/Lapatinib.csv', header=None)
+drug_info = pd.read_csv('data/CGP/drug_cell/drug/PHA-665752.csv', header=None)
 
 drug_info_cell_Col = drug_info[0]  # 选择cell列
 drug_info_label_Col = drug_info[1]  # 选择label列
@@ -43,4 +47,4 @@ data_unstack_select = data_unstack.loc[drug_info_cell_Col_str]
 data_unstack_select['label'] = drug_info_label_Col.values
 print(data_unstack_select)
 # data_unstack_select.fillna(0)
-data_unstack_select.to_csv('data/CGP/drug_cell/common_drugs/Sorafenib_train_data.csv', index=False, float_format='%.2f')
+data_unstack_select.to_csv('data/CGP/drug_cell/common_drugs/PHA-665752_train_data.csv', index=False, float_format='%.2f')
