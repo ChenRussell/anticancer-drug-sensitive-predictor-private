@@ -1,11 +1,11 @@
 # -*- coding:utf-8 -*-
 import pandas as pd
 from sklearn import svm
-from sklearn.metrics import roc_curve, auc  ###计算roc和auc
+from sklearn.metrics import roc_curve, auc, f1_score,precision_score,recall_score  ###计算roc和auc
 import matplotlib.pyplot as plt
 
 # 0样本很多，1样本很少，得到的准确率都很高
-data = pd.read_csv('data/drug_cell/drug/Sorafenib_train_data-rfe.csv')
+data = pd.read_csv('data/drug_cell/drug/Sorafenib/Sorafenib_train_data-rfe.csv')
 data_test = pd.read_csv('data/CGP/drug_cell/common_drugs/Sorafenib_train_data.csv')
 X = data.iloc[:, :-1]
 y = data.iloc[:, -1]
@@ -19,6 +19,15 @@ y_test = data_test.iloc[:, -1]
 model = svm.SVC(C=5)  # gamma缺省值为 1.0/x.shape[1]
 model.fit(X, y)
 y_score = model.decision_function(x_test)
+y_pre = model.predict(x_test)
+f1_sco = f1_score(y_test, y_pre)
+rec_sco = recall_score(y_test, y_pre)   # 召回率，查全率, tp/(tp+fn)
+pre_sco_macro = precision_score(y_test, y_pre, average='macro')
+pre_sco_wei = precision_score(y_test, y_pre, average='weighted')
+pre_sco_bin = precision_score(y_test, y_pre)    # 精准率，查准率，tp/(tp+fp)
+print('f1', f1_sco)
+print('pre_sco_macro', pre_sco_macro)
+print('pre_sco_wei', pre_sco_wei)
 print(model.score(x_test, y_test))
 
 fpr, tpr, threshold = roc_curve(y_test, y_score)  ###计算真正率和假正率
