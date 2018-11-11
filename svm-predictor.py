@@ -4,7 +4,7 @@ from sklearn import svm
 from sklearn.metrics import roc_curve, auc, f1_score, precision_score, recall_score ###计算roc和auc
 import matplotlib.pyplot as plt
 
-data = pd.read_csv('data/drug_cell/drug/Panobinostat/Panobinostat_train_data-rfe-sa-50.csv')
+data = pd.read_csv('data/drug_cell/drug/ZD-6474/ZD-6474_train_data-rfe-sa-50.csv')
 X = data.iloc[:, :-1]
 y = data.iloc[:, -1]
 # X = X.as_matrix()

@@ -208,7 +208,7 @@ class SA_RFE_mRMR(BaseEstimator, MetaEstimatorMixin, SelectorMixin):
                             continue
                         R_sum += mutual_info_._compute_mi(X[:, fea_i], X[:, fea_j], True, True)
                     end = time.time()
-                    print('第%d次循环结束...' % idx, '耗费%d seconds...' % (end - start))
+                    print('第%d次循环结束...' % idx, '耗费%.4f seconds...' % (end - start))
                     R.append(R_sum / len(features))
                 mrmr_end = time.time()
                 print('此次mrmr耗时%d:' % (mrmr_end-mrmr_start))
