@@ -17,11 +17,11 @@ from svm_pso_predictor_original import PSO
 from svm_pso_predictor_RANDIW import PSO_RW
 import time
 
-drug = 'Sorafenib'
-fn = 20
+drug = '17-AAG'
+fn = 40
 n_splits = 3    # 将数据随机切分成三份，每份数据训练集60%，测试集40%，模型准确率为三份数据对应的平均
-# data = pd.read_csv('data/drug_cell/drug/%s/%s_train_data-rfe-sa-%d.csv' % (drug, drug, fn))
-data = pd.read_csv('data/drug_cell/drug/%s/%s_train_data-rfe-mrmr-sa-%d.csv' % (drug, drug, fn))
+data = pd.read_csv('data/drug_cell/drug/%s/%s_train_data-rfe-sa-%d.csv' % (drug, drug, fn))
+# data = pd.read_csv('data/drug_cell/drug/%s/%s_train_data-rfe-mrmr-sa-%d.csv' % (drug, drug, fn))
 X = data.iloc[:, :-1]
 y = data.iloc[:, -1]
 # random_state=1不变的话，每次得到的数据都是一样的，random_state=None，每次的数据不一样
@@ -133,6 +133,6 @@ for run in range(3):
     # plt.show()
     plt.savefig(
         'image/pso_TVAC/c-%s/fn%d/sa-mrmr-%d-pso-cv-compare-%s-%d.png' % (
-            drug, feature_number, feature_number, drug, 1 + run))
+            drug, feature_number, feature_number, drug, 10 + run))
     # plt.show()
     plt.cla()

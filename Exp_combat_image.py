@@ -23,7 +23,7 @@ df["ES5_BONE"] = [4, 4.100, 4.600, 5.200, 6.200, 6.700, 7.100, 8.200, 8.900, 9.3
 df["5637_Bladder"] = [5, 4.200, 4.500, 5.600, 6.100, 6.200, 7.400, 8.300, 8.800, 9.100, 12.000]
 df["C-4-I_Cervix"] = [4, 4.100, 4.300, 5.400, 6.200, 6.600, 7.300, 8.200, 8.400, 8.900, 9.200]
 
-# 用matplotlib来画出箱型图
+# 用matplotlib来画出箱型图y
 bplot = plt.boxplot(x=df.values, patch_artist=True, labels=df.columns, whis=1.5)
 
 colors = ['RED', 'RED', 'RED', "RED", "LIGHTBLUE", "LIGHTBLUE", "LIGHTBLUE", "LIGHTBLUE"]
@@ -32,5 +32,7 @@ for patch, color in zip(bplot['boxes'], colors):
 
 plt.title('使用Combat之后', fontsize=22)
 plt.xticks(fontsize=18)
+plt.yticks(fontsize=18)
 # plt.yscale('log')
+plt.ylabel('Gene Expression Value', fontsize=20)
 plt.show()

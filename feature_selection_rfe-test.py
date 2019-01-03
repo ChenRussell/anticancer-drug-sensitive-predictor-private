@@ -13,9 +13,9 @@ data = data.fillna(0)
 x = data.iloc[:, :-1]
 y = data.iloc[:, -1]
 svc = SVC(kernel="linear", C=1)
-# rfe = SA_RFE(estimator=svc, n_features_to_select=feature_number, step=1)
+rfe = SA_RFE(estimator=svc, n_features_to_select=feature_number, step=1)
 # rfe = SA_mRMR(estimator=svc, n_features_to_select=feature_number, step=1)
-rfe = SA_RFE_mRMR(estimator=svc, n_features_to_select=feature_number, step=1)
+# rfe = SA_RFE_mRMR(estimator=svc, n_features_to_select=feature_number, step=1)
 start = time.time()
 print('算法运行开始......')
 rfe.fit(x, y)  # 训练时间特别长！！！

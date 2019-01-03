@@ -8,32 +8,36 @@ from sklearn.model_selection import train_test_split
 import cmath
 from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import ShuffleSplit
+from sklearn.metrics import hinge_loss, make_scorer
 
-data = pd.read_csv('data/drug_cell/drug/Paclitaxel/Paclitaxel_train_data-rfe.csv')
-data_X = data.iloc[:, :-1]
-data_y = data.iloc[:, -1]
+# data = pd.read_csv('data/drug_cell/drug/Paclitaxel/Paclitaxel_train_data-rfe.csv')
+# data_X = data.iloc[:, :-1]
+# data_y = data.iloc[:, -1]
 # x_train, x_test, y_train, y_test = train_test_split(X, y, random_state=1, train_size=0.7)
 
 MAX_ITER = 500
 
-# data = pd.read_csv('data/drug_cell/drug/Sorafenib_train_data-rfe.csv')
+data_test = pd.read_csv('data/drug_cell/drug/PD-0325901/PD-0325901_train_data-rfe-sa-10.csv')
+data = pd.read_csv('data/CGP/drug_cell/common_drugs/PD-0325901_train_data.csv')
+
+# data = pd.read_csv('data/drug_cell/drug/Sorafenib/Sorafenib_train_data-rfe.csv')
 # data_test = pd.read_csv('data/CGP/drug_cell/common_drugs/Sorafenib_train_data.csv')
-# x_train = data.iloc[:, :-1]
-# y_train = data.iloc[:, -1]
-#
-# x_test = data_test.iloc[:, :-1]
-# y_test = data_test.iloc[:, -1]
+x_train = data.iloc[:, :-1]
+y_train = data.iloc[:, -1]
+
+x_test = data_test.iloc[:, :-1]
+y_test = data_test.iloc[:, -1]
 
 
 # ----------------------PSO参数设置---------------------------------
 class PSO_MTVAC():
     def __init__(self, max_iter, pN=30, dim=2):
-        # self.x_train = x_train
-        # self.y_train = y_train
-        # self.x_test = x_test
-        # self.y_test = y_test
-        self.data_X = data_X
-        self.data_y = data_y
+        self.x_train = x_train
+        self.y_train = y_train
+        self.x_test = x_test
+        self.y_test = y_test
+        # self.data_X = data_X
+        # self.data_y = data_y
 
         self.w = 0.9  # 惯性权重
         self.wS = 0.9
@@ -56,7 +60,7 @@ class PSO_MTVAC():
         self.pN = pN  # 粒子数量
         self.dim = dim  # 搜索维度
 
-        self.maxC = 100
+        self.maxC = 1000
         self.minC = 0.00001
         self.maxGamma = 5
         self.minGamma = 0.00001
@@ -79,13 +83,16 @@ class PSO_MTVAC():
         if g <= 0 or c <= 0:
             return 1e10
         model = svm.SVC(C=c, gamma=g)  # gamma缺省值为 1.0/x.shape[1]
-        # model.fit(self.x_train, self.y_train)
-        # y_score = model.score(self.x_test, self.y_test)
-        # return -y_score
-        cv = ShuffleSplit(n_splits=5, test_size=.4, random_state=0)
-        score = cross_val_score(model, self.data_X, self.data_y, cv=cv)
-        print(score)
-        return -score.mean()
+        model.fit(self.x_train, self.y_train)
+        y_score = model.score(self.x_test, self.y_test)
+        return -y_score
+        # cv = ShuffleSplit(n_splits=3, test_size=.4, random_state=0)
+        # score = cross_val_score(model, self.data_X, self.data_y, cv=cv)
+
+        # fit_score = make_scorer(hinge_loss, greater_is_better=True)  # 损失函数
+        # score = cross_val_score(model, self.data_X, self.data_y, cv=cv, scoring=fit_score)
+        # print(score)
+        # return -score.mean()
 
     # ---------------------初始化种群----------------------------------
     def init_Population(self):
@@ -147,9 +154,10 @@ class PSO_MTVAC():
                     else:
                         self.V[self.rp][self.rd] -= self.r4 * self.max_v[self.rd] / self.m
 
-            print('V: ', self.V[0], end=" ")
-            print('X: ', self.X[0], end=" ")
-            print(self.fit, end=" ")  # 输出最优值
+            print('V: %.5f,%.5f' % (self.V[0][0], self.V[0][1]), end="\t")
+            print('X: %.5f,%.5f' % (self.X[0][0], self.X[0][1]), end="\t")
+            print('fit: %.4f' % self.fit, end="\t")  # 输出最优值
+            print('gBest: %.5f,%.5f' % (self.gbest[0], self.gbest[1]), end="\t")  # 输出gBest
             print('PSO-mTVAC 当前迭代次数：', iter)
 
             # 更新学习因子

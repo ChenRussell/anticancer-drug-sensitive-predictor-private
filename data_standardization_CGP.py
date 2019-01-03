@@ -42,9 +42,9 @@ for col in data_col_cgp:
     # 选择标准化后结果为1或0的细胞系, ----为什么文件结果没有列名？？ 难道是因为只有一列？
     if col == 'VNLG/124':
         data_normalize.loc[(data_normalize[col] == 1) | (data_normalize[col] == 0), col] \
-            .to_csv('data/CGP/drug_cell/drug/VNLG_124.csv')
+            .to_csv('data/CGP/drug_cell/drug/VNLG_124-2.csv')
     else:
         data_normalize.loc[(data_normalize[col] == 1) | (data_normalize[col] == 0), col] \
-            .to_csv('data/CGP/drug_cell/drug/' + col + '.csv')
+            .to_csv('data/CGP/drug_cell/drug/' + col + '-2.csv')
 
 print(data_normalize)
